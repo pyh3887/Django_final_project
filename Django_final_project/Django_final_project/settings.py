@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'ks',
     'yh',
     'yj',
+    'cg',
+    
 ]
 
 MIDDLEWARE = [
