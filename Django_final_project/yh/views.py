@@ -4,7 +4,7 @@ from django.shortcuts import render
 def mainFunc(request):
     
     
-    ㅁㄴㅇㅁㄴㅇ
+    ㅁㄴㅇㅁㄴㅇㅇㅇ
     
     
     return render(request,'aa.html')
