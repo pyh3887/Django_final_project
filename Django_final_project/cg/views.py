@@ -6,5 +6,6 @@ from django.shortcuts import render
 
 
 def mainFunc(request):
-    print('aa')  
+    print('aa')
+    print('asdflaksjdf')  
     return render(request,'aa.html')
