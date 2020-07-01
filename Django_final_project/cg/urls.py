@@ -15,13 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.urls.conf import include
+from yj import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', admin.site.urls),
-    path('ks/',include('ks.urls')),
-    path('yj/',include('yj.urls')),
-    path('yh/',include('yh.urls')),
-    path('cg/',include('cg.urls')),
+    path('',views.mainFunc), 
 ]
