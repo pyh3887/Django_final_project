@@ -6,5 +6,5 @@ from django.shortcuts import render
 
 
 def mainFunc(request):
-      
+    print('aa')  
     return render(request,'aa.html')
