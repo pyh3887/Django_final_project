@@ -8,4 +8,5 @@ from django.shortcuts import render
 def mainFunc(request):
     print('aa')
     print('asdflaksjdf')  
+    print('dasflkasjdf')
     return render(request,'aa.html')
