@@ -27,15 +27,7 @@ def mainFunc(request):
     plt.clf()
     data = pd.read_csv('https://raw.githubusercontent.com/pyh3887/Django_final_project/master/student.csv', encoding='euc-kr')
     data['성적'] = data['성적'].map({'H':2,'M':1,'L':0})
-#       label = LabelEncoder()
-#       Cat_Colums = data.dtypes.pipe(lambda Features: Features[Features=='object']).index
-#     
-#     
-#         
-#      
-#     print(data)
-#     for col in Cat_Colums:
-#         data[col] = label.fit_transform(data[col])
+
     # 데이터 상위 5개 행 읽기
     # print(data.head())
     # 데이터의 컬럼별 요약 통계량 확인
@@ -102,10 +94,4 @@ def mainFunc(request):
     fig = px.violin(data, y="과정반복수", x="결석일수", color="성별", box=True, points="all", hover_data=df.columns)
    
     plot1_div = plot(fig,output_type='div') 
-    
-    # sns.countplot(x='국적',data = data, hue='성적',palette="Set3",dodge=False, ax=ax[0])
-
-
-    # fig.savefig(os.path.dirname(os.path.realpath(__file__)) + '\\static\\images\\class_cuntry.png')
-    
     return render(request,'grade_cuntry_pie.html', context={'plot_div':plot_div,'plot1_div':plot1_div})
