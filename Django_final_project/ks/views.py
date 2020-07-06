@@ -10,12 +10,14 @@ import plotly.graph_objects as go
 
 from sklearn.preprocessing import LabelEncoder
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
+from tensorflow.keras.layers import Dense, Input
 from tensorflow.keras.utils import to_categorical
 from plotly.offline import plot
 from tensorflow.keras import layers
 from xgboost.callback import early_stop
 from plotly.subplots import make_subplots
+from tensorflow.keras.models import Model
+from sklearn.model_selection import train_test_split
 
 plt.rc('font', family='malgun gothic')
 plt.rcParams['axes.unicode_minus'] = False
@@ -63,6 +65,10 @@ def mainFunc(request):
     xhas = df.loc[:, ['담당부모', '발표수', '과정반복수', '새공지사항확인수', '토론참여수', '부모의학교만족도', '결석일수', '성적']]
     yhas = df.loc[:, ['발표수']]
     y = df.발표수.tolist()
+    
+    xt = df.loc[:, ['발표수', '과정반복수', '새공지사항확인수', '토론참여수', '부모의학교만족도', '결석일수', '성적']]
+    yt = df.loc[:, ['담당부모']]
+    yh = df.담당부모.tolist()
 
     train_dataset = xhas.sample(frac=0.7, random_state=0)
     test_dataset = xhas.drop(train_dataset.index)
@@ -109,12 +115,13 @@ def mainFunc(request):
     print(model.predict(st_train_data[:1]))     # 결과는 신경쓰지 않는다.
     
     # 모델 훈련
-    epochs = 5000
+    epochs = 1000
     
     # 학습 조기 종료
     early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=5)
     
-    history = model.fit(st_train_data,train_labels, epochs=epochs, validation_split=0.2, verbose=1, callbacks=[early_stop]) 
+    # history = model.fit(st_train_data,train_labels, epochs=epochs, validation_split=0.2, verbose=1, callbacks=[early_stop])
+    history = model.fit(st_train_data,train_labels, epochs=epochs, validation_split=0.2, verbose=1) 
     # 원래 데이터셋이 1000개 이고, fit 함수의 validation_split = 0.2 로 하면, 
     # training dataset 은 800개로 하여, training 시키고,나머지 200개는 test dataset 으로 사용하여, 모델을 평가하게 된다.
     df = pd.DataFrame(history.history)
@@ -132,7 +139,7 @@ def mainFunc(request):
     fig.add_trace(go.Scatter(x=hist['epoch'], y=hist['val_mean_absolute_error'], name = 'Val Error',
                              line=dict(color='royalblue', width=4)))
     
-    fig.update_layout(title='plot_history',
+    fig.update_layout(title='MAE 오차',
                xaxis_title='Epoch',
                yaxis_title='Mean Abs Error [발표수]',
                width=600, height=600)
@@ -144,7 +151,7 @@ def mainFunc(request):
     fig.add_trace(go.Scatter(x=hist['epoch'], y=hist['val_mean_squared_error'], name = 'Val Error',
                              line=dict(color='royalblue', width=4)))
     
-    fig.update_layout(title='plot_history',
+    fig.update_layout(title='MSE 오차',
                xaxis_title='Epoch',
                yaxis_title='Mean Square Error [발표수]',
                width=600, height=600)
@@ -162,17 +169,54 @@ def mainFunc(request):
     # 예측
     test_pred = model.predict(st_test_data).flatten()
     print("예측 값 :\n", test_pred)
+    x = test_pred.tolist()
     print("실제 값 :\n", y)
     
     # 데이터 분포와 모델에 의한 선형 회귀선 시각화
     fig = px.scatter(x=test_labels, y=test_pred, width=900, height=900)
+    fig.update_layout(title="",
+                  xaxis_title="True value[발표수]",
+                  yaxis_title="predict value[발표수]")
     plot_div1 = plot(fig, output_type='div')
     
     # 오차 분포 확인 (정규성 : 잔차항이 정규분포를 따르는지 확인)
     err = test_pred
     fig = px.histogram(err, width=900, height=900, title='error[발표수]')
+    fig.update_layout(title="",
+                  xaxis_title="predict error[발표수]",
+                  yaxis_title="")
     plot_div2 = plot(fig,output_type='div')
     
+    x_train, x_test, y_train, y_test = train_test_split(xt, yt, test_size=0.3, random_state=123)
+    
+    # 모델 구성
+    inputs = Input(shape=(7, ))
+    output1 = Dense(64, activation='relu')(inputs)
+    output2 = Dense(32, activation='relu')(output1)
+    output3 = Dense(16, activation='relu')(output2)
+    output4 = Dense(1, activation='sigmoid')(output3)
+    model = Model(inputs, output4)
+    
+    model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['acc'])
+    
+    history = model.fit(x_train, y_train, epochs=1000, batch_size=64, verbose=1)
+    
+    scores = model.evaluate(x_test, y_test)
+    
+    print('%s : %.2f%%'%(model.metrics_names[1], scores[1] * 100))
+    print(x_test[:1])
+    pred = model.predict(xt)
+    xh = np.where(pred.flatten() > 0.5, 1, 0)
+    print('예측 결과 :\n', np.where(pred.flatten() > 0.5, 1, 0))    # pred 값이 0.5보다 크면 1, 아니면 0을 보여준다
+    print('실제 결과 :\n', yh)
+    
+    fig = px.line(history.history, y='loss', width=900, height=900)
+    fig.update_layout(title="",
+                  xaxis_title="epoch",
+                  yaxis_title="")
+    plot_div3 = plot(fig, output_type='div')
+    xh = xh.tolist()
+    
     return render(request,'pearson.html',
-                  context={'plot_div':plot_div, 'plot_div01':plot_div01, 'plot_div02':plot_div02, 'plot_div1':plot_div1, 'plot_div2':plot_div2, 'loss':loss, 'mae':mae, 'mse':mse, 'test_pred':test_pred, 'y':y}
+                  context={'plot_div':plot_div, 'plot_div01':plot_div01, 'plot_div02':plot_div02, 'plot_div1':plot_div1, 'plot_div2':plot_div2, 'plot_div3':plot_div3, 'loss':loss, 'mae':mae, 'mse':mse, 'x':x, 'y':y, 'xh':xh, 'yh':yh}
                   )
