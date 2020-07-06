@@ -5,22 +5,25 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
+
 $(document).ready(function(){
-	
-	
+		
 	//alert("a")
 	//버거를 눌렀을 시
 	$("#burger").bind('click',function(){
 		$("#showData").empty()
 		//alert('b')
 			$.ajax({
-				url:'/show',
+				url:'show',
 				type:'get',
 				dataType:'json',
 				async:true,
 				success:function(data){
 					//alert(data)
-					alert(data)					
+					alert(data['a'])
+					str = "<h1>"+ data['a'] + "</h1>"
+					Plotly.newPlot(showData2,data['yh_grap3'])
+					$('#showData').append(str)	
 				},
 				error:function(){
 					$('#showData').text('error')
@@ -36,6 +39,7 @@ dsa
 
 <div><a href="#" id="burger">버거</a><a href="#" id="juice">음료</a><a href="admin">관리자</a><br><br><hr>
 <div id="showData"></div>
+<div id="showData2"></div>
 
 {{a}}
 
