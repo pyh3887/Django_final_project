@@ -19,6 +19,8 @@ from tensorflow.keras import layers
 from django.shortcuts import render
 import tensorflow as tf
 from tensorflow.keras.models import Model
+from django.http.response import HttpResponseRedirect, HttpResponse
+import json
 
 plt.rc('font',family='malgun gothic')
 # Create your views here.
@@ -333,7 +335,7 @@ def mainFunc(request):
     early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=5)
     
     # history = model.fit(st_train_data,train_labels, epochs=epochs, validation_split=0.2, verbose=1, callbacks=[early_stop])
-    history = model.fit(st_train_data,train_labels, epochs=epochs, validation_split=0.2, verbose=1) 
+    history = model.fit(st_train_data,train_labels, epochs=epochs, validation_split=0.2, verbose=1,callbacks=[early_stop]) 
     # 원래 데이터셋이 1000개 이고, fit 함수의 validation_split = 0.2 로 하면, 
     # training dataset 은 800개로 하여, training 시키고,나머지 200개는 test dataset 으로 사용하여, 모델을 평가하게 된다.
     df = pd.DataFrame(history.history)
@@ -433,3 +435,103 @@ def mainFunc(request):
     
     
     return render(request,'ax.html',{'a':a,'yh_grap1':yh_grap1,'yh_grap2':yh_grap2,'yh_grap3':yh_grap3,'plot_div':plot_div, 'plot_div01':plot_div01, 'plot_div02':plot_div02, 'plot_div1':plot_div1, 'plot_div2':plot_div2, 'plot_div3':plot_div3, 'loss':loss, 'mae':mae, 'mse':mse, 'x':x, 'y':y, 'xh':xh, 'yh':yh})
+
+
+def tensorFunc(request):
+    #tensorflow
+    
+    
+    data2 = pd.read_csv('https://raw.githubusercontent.com/pyh3887/Django_final_project/master/education.csv',encoding='euc-kr')
+   
+   
+    print(data2)
+#     label = LabelEncoder()
+#     Cat_Colums = data2.dtypes.pipe(lambda Features: Features[Features=='object']).index
+#           
+#     for col in Cat_Colums:
+#         data2[col] = label.fit_transform(data2[col])
+#      
+    data2.loc[data2['성적'] == 'H','성적'] = 2
+    data2.loc[data2['성적'] == 'M','성적'] = 1
+    data2.loc[data2['성적'] == 'L','성적'] = 0
+     
+    
+    
+    print(data2)
+    #x_df = data2[['발표수','과정반복수','새공지사항확인수','토론참여수']]
+    #x_df = (x_df- x_df.mean())/x_df.std()
+    #print(x_df)
+    #dataset2 = x_df.values
+    dataset = data2.values
+    print(dataset)
+    # x = dataset2[:,0:4]# feature
+    x = dataset[:,9:13].astype(float)# feature 
+    y = dataset[:,-1]
+    #print(y)
+    nb_classes = 3  #label 7가지
+    y_one_hot = to_categorical(y,num_classes= nb_classes)
+    print(x)
+    print(y_one_hot[:3])
+    model = Sequential()
+    
+    model.add(Dense(64,input_shape=(4,),activation='relu')) # 입력데이터(노드) 보단 출력데이터(유닛)이 더 많도록하자(병목현상 방지)
+    model.add(Dense(16, activation='relu'))
+    model.add(Dense(16, activation='relu'))
+    model.add(Dense(8, activation='relu'))      
+    model.add(Dense(3,activation='softmax')) # softmax 
+    model.summary()
+    model.compile(optimizer='adam',loss = 'categorical_crossentropy',metrics='accuracy')
+    
+    early_stop = EarlyStopping(monitor='loss',patience=10)
+    history = model.fit(x,y_one_hot,epochs=500, batch_size = 100, validation_split=0.3, verbose=2,callbacks=[early_stop]) # 딥러닝 시작 
+    scores = model.evaluate(x,y_one_hot)
+
+    
+    print('eval : ' , scores)
+     
+    # 새로운 데이터로 
+    # M 0,0,1 L 0,1,0 H 1,0,0    
+      
+    new_data = np.array([[20,14,12,19]])
+    
+    print(np.argmax(model.predict(new_data)))
+  
+    if np.argmax(model.predict(new_data)) == 2:
+        a = '성적이  상위권으로 예측됩니다.'
+          
+ 
+    elif np.argmax(model.predict(new_data)) == 1:
+        a = '성적이 중위권으로 예측됩니다.'
+ 
+    else :
+        a = '성적이 하위권 으로 예측됩니다.'
+     
+    print(a)
+    loss = history.history['loss']
+    epochs = range(1,len(loss)+1)
+            
+
+  
+    
+    # Create traces
+    yh_fig3 = go.Figure()
+ 
+    yh_fig3.add_trace(go.Scatter(x=history.epoch, y=history.history['loss'],
+                        mode='lines',
+                        name='loss'))
+    yh_fig3.add_trace(go.Scatter(x=history.epoch, y=history.history['val_loss'],
+                        mode='lines+markers',
+                        name='val_loss'))
+    yh_fig3.add_trace(go.Scatter(x=history.epoch, y=history.history['accuracy'],
+                        mode='markers', name='accuracy'))
+    yh_fig3.add_trace(go.Scatter(x=history.epoch, y=history.history['val_accuracy'],
+                        mode='markers', name='val_accuracy'))
+    yh_fig3.update_layout(title='Tensorflow 정확도와 손실값')
+    
+    yh_grap3 = plot(yh_fig3,output_type='div')   
+    
+    
+    datas = {'a': a, 'yh_grap3':yh_grap3} 
+        
+    #print(datas)
+    return HttpResponse(json.dumps(datas),content_type='application/json')

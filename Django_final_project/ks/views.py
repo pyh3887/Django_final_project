@@ -121,7 +121,7 @@ def mainFunc(request):
     early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=5)
     
     # history = model.fit(st_train_data,train_labels, epochs=epochs, validation_split=0.2, verbose=1, callbacks=[early_stop])
-    history = model.fit(st_train_data,train_labels, epochs=epochs, validation_split=0.2, verbose=1) 
+    history = model.fit(st_train_data,train_labels, epochs=epochs, validation_split=0.2, verbose=1,callbacks=[early_stop]) 
     # 원래 데이터셋이 1000개 이고, fit 함수의 validation_split = 0.2 로 하면, 
     # training dataset 은 800개로 하여, training 시키고,나머지 200개는 test dataset 으로 사용하여, 모델을 평가하게 된다.
     df = pd.DataFrame(history.history)
