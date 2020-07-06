@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import plotly
 import seaborn as sns
 import os
-import plotly.graph_objs as go
+import plotly.graph_objs as go 
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier
