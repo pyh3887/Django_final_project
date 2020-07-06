@@ -50,13 +50,6 @@ def mainFunc(request):
 #     값이 +0.3 ~ +0.7 이면, 뚜렷한 양적 상관관계
 #     값이 +0.7 ~ +1.0 이면, 강한 양적 상관관계로 해석됩니다.
 
-#     이전에 저장해서 쓰던 방식
-#     plt.figure(figsize=(9, 9))
-#     sns.heatmap(df.corr(), annot=True, fmt = '.2f', linewidths=.5, cmap='RdBu_r')
-#     fig = plt.gcf()
-#     fig.savefig(os.path.dirname(os.path.realpath(__file__)) + '\\static\\images\\heatmap.png')
-#     plt.clf()
-
     fig = px.imshow(df.corr(),
                     x=['성별', '국적', '출생지', '교육단계', '학년', '학급', '전공', '학기', '담당부모', '발표수', '과정반복수', '새공지사항확인수', '토론참여수', '부모의학교만족도', '결석일수', '성적'],
                     y=['성별', '국적', '출생지', '교육단계', '학년', '학급', '전공', '학기', '담당부모', '발표수', '과정반복수', '새공지사항확인수', '토론참여수', '부모의학교만족도', '결석일수', '성적'],
@@ -70,25 +63,6 @@ def mainFunc(request):
     xhas = df.loc[:, ['담당부모', '발표수', '과정반복수', '새공지사항확인수', '토론참여수', '부모의학교만족도', '결석일수', '성적']]
     yhas = df.loc[:, ['발표수']]
     y = df.발표수.tolist()
-    
-#     xdata = xhas.values
-#     ydata = yhas.values
-#     print(xdata[:2], xdata.shape)
-#     print(ydata[:2], ydata.shape)
-#     
-#     model = Sequential()
-#     model.add(Dense(64, input_shape=(7, ), activation='relu'))
-#     model.add(Dense(64, activation='relu'))
-#     model.add(Dense(2, activation='linear'))
-#     print(model.summary())
-#     model.compile(optimizer='adam', loss='mse', metrics=['acc'])
-#     
-#     model.fit(xdata, ydata, epochs=100, batch_size=10, verbose=0)
-#     model_eval = model.evaluate(xdata, ydata)
-#     print('model_eval :', model_eval)
-#     new_x = [[1, 80, 50, 100, 1, 10, 3]]
-#     print('예측 값 :', model.predict(xdata))
-#     print('실제 값 :', ydata)
 
     train_dataset = xhas.sample(frac=0.7, random_state=0)
     test_dataset = xhas.drop(train_dataset.index)
@@ -149,31 +123,6 @@ def mainFunc(request):
     # ['loss', 'mean_squared_error', 'mean_absolute_error',
     #   'val_loss', 'val_mean_squared_error', 'val_mean_absolute_error']    # validation_split을 썻기 때문에 나오는 것이다. 안쓰면 위에 3개만 나온다.
     
-#     def plot_history(history):
-#         hist = pd.DataFrame(history.history)
-#         hist['epoch'] = history.epoch
-#         print(hist)
-#         print(hist.columns)
-#         df = px.data.gapminder().query("continent=='Oceania'")
-#         print(df)
-#         
-#         plt.figure(figsize=(8,12))
-#         
-#         plt.subplot(2,1,1)
-#         plt.xlabel('Epoch')
-#         plt.ylabel('Mean Abs Error [발표수]')
-#         plt.plot(hist['epoch'], hist['mean_absolute_error'], label='Train Error')
-#         plt.plot(hist['epoch'], hist['val_mean_absolute_error'], label ='Val Error')
-#         plt.legend()
-#         
-#         plt.subplot(2,1,2)
-#         plt.xlabel('Epoch')
-#         plt.ylabel('Mean Square Error [$발표수^2$]')
-#         plt.plot(hist['epoch'], hist['mean_squared_error'],label='Train Error')
-#         plt.plot(hist['epoch'], hist['val_mean_squared_error'],label = 'Val Error')
-#         plt.legend()
-#     
-#     plot_history(history)
     hist = pd.DataFrame(history.history)
     hist['epoch'] = history.epoch
 
