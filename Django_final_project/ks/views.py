@@ -115,7 +115,7 @@ def mainFunc(request):
     print(model.predict(st_train_data[:1]))     # 결과는 신경쓰지 않는다.
     
     # 모델 훈련
-    epochs = 1000
+    epochs = 500
     
     # 학습 조기 종료
     early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=5)
@@ -159,17 +159,17 @@ def mainFunc(request):
     
     # 모델 평가
     loss, mae, mse = model.evaluate(st_test_data, test_labels)
-    print('test dataset으로 모델 평가 mae : {:5.3f}'.format(mae))
-    print('test dataset으로 모델 평가 mse : {:5.3f}'.format(mse))
-    print('test dataset으로 모델 평가 loss : {:5.3f}'.format(loss))  # 오차
-    mae = 'mean_absolute_error 오차 : {:5.3f}'.format(mae)
-    mse = 'mean_squared_error 오차 : {:5.3f}'.format(mse)
-    loss = 'loss 오차 : {:5.3f}'.format(loss)
+    print('test dataset으로 모델 평가 mae : {:.3f}'.format(mae))
+    print('test dataset으로 모델 평가 mse : {:.3f}'.format(mse))
+    print('test dataset으로 모델 평가 loss : {:.3f}'.format(loss))  # 오차
+    mae = 'mean_absolute_error 오차 : {:.3f}'.format(mae)
+    mse = 'mean_squared_error 오차 : {:.3f}'.format(mse)
+    loss = 'loss 오차 : {:.3f}'.format(loss)
     
     # 예측
     test_pred = model.predict(st_test_data).flatten()
-    print("예측 값 :\n", test_pred)
-    x = test_pred.tolist()
+    print("예측 값 :\n", np.round(test_pred.tolist(), 2))
+    x = np.round(test_pred.tolist(), 2)
     print("실제 값 :\n", y)
     
     # 데이터 분포와 모델에 의한 선형 회귀선 시각화
@@ -199,7 +199,7 @@ def mainFunc(request):
     
     model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['acc'])
     
-    history = model.fit(x_train, y_train, epochs=1000, batch_size=64, verbose=1)
+    history = model.fit(x_train, y_train, epochs=500, batch_size=64, verbose=1)
     
     scores = model.evaluate(x_test, y_test)
     
