@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title>데이터 분류</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript" src="/static/js/gra.js"></script>
 </head>
 <body>
 <div align="center">
@@ -21,6 +23,7 @@
 <div align="center">
 <h3>담당부모의 상관 계수가 0.3보다 큰 것들을 선택해서 상관 관계가 높은 칼럼들로 sigmoid를 사용해 학습을 하여 모델을 만들어서 값이 두 개인 담당부모로 이항 분류를 할 수 있다.</h3>
 {{plot_div3|safe}}<br>
+정확도 : {{acc}}<br>
 실제 값 :<br>
 {{yh}}<br>
 예측 값 :<br>
@@ -65,6 +68,7 @@
 {{plot_div2|safe}}<br>
 <h3>오차 분포 확인 (정규성 : 잔차항이 정규분포를 따르는지 확인)</h3>
 </div>
-
+<a href="#" id="gogo" style="text-decoration: none;">그래프 보기</a>
+<div id="grap"></div>
 </body>
 </html>
