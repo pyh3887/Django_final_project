@@ -478,7 +478,7 @@ def mainFunc(request):
     # 랜덤포레스트 사용
 
         
-    return render(request,'index.html',{'yh_grap1':yh_grap1,'yh_grap2':yh_grap2,'yh_3D':yh_3D,
+    return render(request,'full.html',{'yh_grap1':yh_grap1,'yh_grap2':yh_grap2,'yh_3D':yh_3D,
     'yj_grap1': plot_div,'yj_pie': pie_div,'yj_grap2': last_div,'yj_grap3': ab_plot,'yj_scatter': plot5_div,'cg_graph1': plot10_div,'cg_graph2': plot11_div,'cg_graph3':cg_graph,'cg_chart':cg_chart,'heatmap': plot20_div})
 
 
