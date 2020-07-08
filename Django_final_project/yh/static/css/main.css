@@ -1,5 +1,5 @@
-
-    @keyframes plyr-progress {
+@charset "UTF-8";
+ @keyframes plyr-progress {
       to {
         background-position: 25px 0;
       }
@@ -25,7 +25,7 @@
     .plyr input,
     .plyr label {
       touch-action: manipulation;
-      background-color: #000000;
+      
     }
 
     .plyr:focus {
@@ -219,10 +219,8 @@
     .plyr .plyr__video-embed iframe {
       pointer-events: none;
     }
-  </style>
-  <!--fullPage.js CSS-->
-  <style type="text/css">
-    /*!
+  
+ /*!
  * fullPage 2.9.5
  * https://github.com/alvarotrigo/fullPage.js
  * MIT licensed
@@ -485,3 +483,4 @@
     .fp-responsive .fp-auto-height-responsive .fp-tableCell {
       height: auto !important;
     }
+  
