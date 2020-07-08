@@ -14,6 +14,13 @@ from tensorflow.keras.callbacks import  EarlyStopping
 import plotly.graph_objs as go 
 from plotly.offline import plot 
 import os
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.linear_model import LinearRegression
+from sklearn.neighbors import KNeighborsRegressor
+from xgboost import XGBRegressor
+import xgboost as xgb
+from sklearn.metrics import accuracy_score
+
 
 from tensorflow.keras import layers
 from django.shortcuts import render
@@ -23,6 +30,7 @@ from django.http.response import HttpResponseRedirect, HttpResponse
 import json
 from sklearn.metrics._classification import accuracy_score
 import plotly.express as px
+from numpyencoder.numpyencoder import NumpyEncoder
 
 plt.rc('font',family='malgun gothic')
 # Create your views here.
@@ -127,51 +135,19 @@ def mainFunc(request):
     plot6_div = plot(fig6,output_type='div')
 
 
+    
 
+    
 
 
 #찬규씨
     plt.clf()
     data = pd.read_csv('https://raw.githubusercontent.com/pyh3887/Django_final_project/master/student.csv', encoding='euc-kr')
     data['성적'] = data['성적'].map({'H':2,'M':1,'L':0})
-
-    # 데이터 상위 5개 행 읽기
-    # print(data.head())
-    # 데이터의 컬럼별 요약 통계량 확인
-    # print(data.describe())
-    # 데이터의 행과 열의 개수
-    # print(data.shape)
-    # 결측값 확인
-    # print(data.isnull().sum())
+   
     
+    # 국가별 성적 상.중.하 인원 분포도
     
-#     # 국적 인원 분포도 (1)
-#     print(data['국적'].value_counts())
-#     # 국적 인원 분포도 퍼센트로 막대그래프 출력 (2)
-#     print('인원수\n',data.국적.value_counts(normalize=False))
-#     plt.subplot(1, 2, 1)
-#     data.국적.value_counts(normalize=False).plot(kind='bar')
-#     
-#     # 국적별 성적 분포도
-#     print('인원수\n',data.성적.value_counts(normalize=False))
-#     plt.subplot(1, 2, 2)
-#     data.성적.value_counts(normalize=False).plot(kind='pie')
-    
-    # 국적별 발표 수
-#     print('발표 수 : \n', data.발표수.value_counts())
-    
-    # counts 값 percentage 로 변경
-#     print(data['국적'].unique())
-    # for i in data['국적'].unique():
-    
-#     for i in len(data['국적'].value_counts()):
-#         i = i / 480 * 100
-        
-
-    # 이미지 저장 작업
-    # plt.gcf()
-
-    # 1행 1열에 국적별 성적 출력
     df = pd.DataFrame({"국적":data['국적'],"성적":data['성적']})
     df7 = pd.crosstab(df.성적, df.국적, margins=True)
 #     print(df7.columns)
@@ -196,17 +172,131 @@ def mainFunc(request):
     fig8.update_layout(barmode ='stack')
     plot10_div = plot(fig8,output_type='div') 
     
+    
+    #--------- 국가별 성별 비율 그래프 
+    
+    df1 = pd.DataFrame({"국적":data['국적'],"성별":data['성별']})
+    print(df1)
+    df8 = pd.crosstab(df1.성별, df1.국적, margins=True)
+    print(df8)
+    df8 = df8.drop(['All'])
+    fig50 = go.Figure(data=[
+        go.Bar(name='M', x=['Egypt', 'Iran', 'Iraq', 'Jordan', 'KW', 'Lybia', 'Morocco',
+       'Palestine', 'SaudiArabia', 'Syria', 'Tunis', 'USA', 'lebanon',
+       'venzuela'],y=df8.iloc[0,:17].values),    
+        go.Bar(name='F', x=['Egypt', 'Iran', 'Iraq', 'Jordan', 'KW', 'Lybia', 'Morocco',
+       'Palestine', 'SaudiArabia', 'Syria', 'Tunis', 'USA', 'lebanon',
+       'venzuela'],y=df8.iloc[1,:17].values),
+        ])
+        # Change the bar mode
+    fig50.update_layout(barmode ='stack')
+    cg_graph = plot(fig50,output_type='div') 
+   
+   
+    
     fig9 = px.violin(data, y="과정반복수", x="결석일수", color="성별", box=True, points="all", hover_data=df.columns)
     fig9.update_layout(width=1000)
     plot11_div = plot(fig9,output_type='div') 
+    
+    
+    
+    # 랜덤포레스트 사용
+    # 모델 평가 생성
+    data = pd.read_csv('https://raw.githubusercontent.com/pyh3887/Django_final_project/master/student.csv', encoding='euc-kr')
+    
+    df2 = pd.DataFrame({"결석일수":data['결석일수'],"발표수":data['발표수'],"새공지사항확인수":data['새공지사항확인수'],"토론참여수":data['토론참여수']})
+    df2['결석일수'] = data['결석일수'].map({'Under-7':0,'Above-7':1})
+    
+    
+    x = df2[['발표수','토론참여수','새공지사항확인수']].values # 2차원
+    y = df2[['결석일수']].values # 1차원
+    
+    # 여기서부터 분류 예측 모델별 생성 후 정확도 분석
+    # 모델 평가 생성 - > 정확도 분석
+    
+    
+    # 랜덤포레스트
+    new_x = [[0,20,10]]
+    
+    model = RandomForestRegressor(n_estimators=1000, criterion='mse').fit(x,y)
+    modelflatten = model.predict(x)[:10]
+    print('예측값 ', np.where(modelflatten.flatten() > 0.5 , 1, 0))
+    print('실제값 : ', y[:10].ravel())
+    a = model.predict(x)
+    xh = np.where(a.flatten() > 0.5,1,0)
+    # print(xh.shape)
+    # print(y.shape)
+    print('RandomForestRegressor : ' , accuracy_score(y,xh))
+    print('RandomForestRegressor 새로운 값으로 예측 : ' ,model.predict(new_x))
+    print('===========================================================')
+    
+    
+    # LinearRegression
+    model1 = LinearRegression().fit(x,y)
+    model1flatten = model1.predict(x)[:10]
+    print('예측값 ', np.where(model1flatten.flatten() > 0.5 , 1, 0))
+    print('실제값 : ', y[:10].ravel())
+    a = model1.predict(x)
+    xh = np.where(a.flatten() > 0.5,1,0)
+    resultLinearRegression = accuracy_score(y,xh)
+    print('LinearRegression : ' , resultLinearRegression)
+    print('LinearRegression 새로운 값으로 예측 : ' ,model.predict(new_x))
+    print('===========================================================')
+    
+    
+    # KNeighborsRegressor
+    model2 = KNeighborsRegressor(n_neighbors=3).fit(x,y)
+    model2flatten = model2.predict(x)[:10]
+    print('예측값 ', np.where(model2flatten.flatten() > 0.5 , 1, 0))
+    print('실제값 : ', y[:10].ravel())
+    a = model2.predict(x)
+    xh = np.where(a.flatten() > 0.5,1,0)
+    resultKNeighborsRegressor = accuracy_score(y,xh)
+    print('KNeighborsRegressor : ' , accuracy_score(y,xh))
+    print('KNeighborsRegressor 새로운 값으로 예측 : ' ,model.predict(new_x))
+    print('===========================================================')
+    
+    
+    # XGboost 96%의 확률
+    model3 = XGBRegressor(n_estimators=100).fit(x,y)
+    model3flatten = model3.predict(x)[:10]
+    print('예측값 ', np.where(model3flatten.flatten() > 0.5 , 1, 0))
+    print('실제값 : ', y[:10].ravel())
+    a = model3.predict(x)
+    xh = np.where(a.flatten() > 0.5,1,0)
+    resultXGboost = accuracy_score(y,xh)
+    print('XGboost : ' , accuracy_score(y,xh))
+    print('XGboost 새로운 값으로 예측 : ' ,model.predict(new_x))
+    print('===========================================================')
+    # = = = = == = = = = = = = 모델별 시각화 
+    import plotly.figure_factory as ff
+    
+    text = [['모델명', '예측값', '실제값', '정확도'], ['RandomForestRegressor',np.where(modelflatten.flatten() > 0.5 , 1, 0), y[:10].ravel(), accuracy_score(y,xh)],
+                                            ['LinearRegression',np.where(model1flatten.flatten() > 0.5 , 1, 0), y[:10].ravel(), resultLinearRegression], 
+                                            ['KNeighborsRegressor',np.where(model2flatten.flatten() > 0.5 , 1, 0), y[:10].ravel(), resultKNeighborsRegressor], 
+                                            ['XGboost',np.where(model3flatten.flatten() > 0.5 , 1, 0), y[:10].ravel(), resultXGboost]]
+    
+    colorscale = [[0, '#272D31'],[.5, '#ffffff'],[1, '#ffffff']]
+    font=['#FCFCFC', '#00EE00', '#008B00', '#004F00', '#660000']
+    
+    fig51 = ff.create_table(text, colorscale=colorscale, font_colors=font)
+    fig.layout.width=800
+    cg_chart = plot(fig51,output_type='div') 
+    
+    
+    
+    
+    
+      
+   
 
 
-    fig = px.scatter_3d(data, x='발표수', y='토론참여수', z='새공지사항확인수',
-              color='성적', size_max=1,
-              symbol='성적', opacity=0.7)
-    # tight layout
-    fig.update_layout(margin=dict(l=0, r=0, b=0, t=0),width=500,height=500)
-    plot12_div = plot(fig,output_type='div')
+
+
+
+
+
+    
     # =================================
 
 
@@ -223,6 +313,9 @@ def mainFunc(request):
     df.loc[df['성적'] == 0, '성적'] = 3
     df.loc[df['성적'] == 2, '성적'] = 2
     df.loc[df['성적'] == 1, '성적'] = 1
+    
+    
+    
     print(df['성적'].head())
 #     print(df)
     print(df['발표수'].head(20))
@@ -276,7 +369,7 @@ def mainFunc(request):
     
     #print('예측값 : ', pred[:5])
     #print('실제값 : ', np.array(test_y[:5]))
-    from sklearn.metrics import accuracy_score
+    
     #print('분류 정확도 : ', accuracy_score(test_y, pred))
     feature_important = model.get_booster().get_score(importance_type='weight')
     keys = list(feature_important.keys())
@@ -357,7 +450,14 @@ def mainFunc(request):
     yh_grap2 = plot(yh_fig2,output_type='div')
 
     
-    
+    data = pd.read_csv('https://raw.githubusercontent.com/pyh3887/Django_final_project/master/student.csv',encoding='euc-kr')
+    data['성적'] = data['성적'].map({'H':2,'M':1,'L':0})
+    fig = px.scatter_3d(data, x='발표수', y='토론참여수', z='과정반복수',
+              color='성적', size_max=1,
+              symbol='성적', opacity=0.7)
+    # tight layout
+    fig.update_layout(margin=dict(l=0, r=0, b=0, t=0),width=500,height=500)
+    yh_3D = plot(fig,output_type='div')
     
 
 
@@ -378,8 +478,17 @@ def mainFunc(request):
     # 랜덤포레스트 사용
 
         
-    return render(request,'index.html',{'yh_grap1':yh_grap1,'yh_grap2':yh_grap2,
-    'yj_grap1': plot_div,'yj_pie': pie_div,'yj_grap2': last_div,'yj_grap3': ab_plot,'yj_scatter': plot5_div,'cg_graph1': plot10_div,'cg_graph2': plot11_div,'yh_graph_3d': plot12_div,'heatmap': plot20_div})
+    return render(request,'index.html',{'yh_grap1':yh_grap1,'yh_grap2':yh_grap2,'yh_3D':yh_3D,
+    'yj_grap1': plot_div,'yj_pie': pie_div,'yj_grap2': last_div,'yj_grap3': ab_plot,'yj_scatter': plot5_div,'cg_graph1': plot10_div,'cg_graph2': plot11_div,'cg_graph3':cg_graph,'cg_chart':cg_chart,'heatmap': plot20_div})
+
+
+
+
+
+
+
+
+
 
 
 
@@ -577,9 +686,27 @@ def ksajax(request):
                   yaxis_title="")
     plot_div3 = plot(fig, output_type='div')
     xh = xh.tolist()
+    
+    
+    x = json.dumps(x, cls=NumpyEncoder)
+    y = json.dumps(y, cls=NumpyEncoder)
+    xh = json.dumps(xh, cls=NumpyEncoder)
+    yh = json.dumps(yh, cls=NumpyEncoder)
+    
+#     x = x.list()
+#     y = y.list()
+#     xh = xh.list()
+#     yh = yh.list()
    
-    data={'ks_graph_mae':plot_div01,'ks_graph_mse':plot_div02,'ks_graph_linear':plot_div1,'ks_graph1':plot_div2,'ks_graph2':plot_div3, 'loss':loss, 'mae':mae, 'mse':mse,'acc':acc}
+    data={'ks_graph_mae':plot_div01,'ks_graph_mse':plot_div02,'ks_graph_linear':plot_div1,'ks_graph1':plot_div2,'ks_graph2':plot_div3, 'loss':loss, 'mae':mae, 'mse':mse,'acc':acc, 'x':x, 'y':y, 'xh':xh, 'yh':yh}
     return HttpResponse(json.dumps(data),content_type='application/json')
+
+
+
+
+
+
+
 
 def Randomajax(request):
     # 모델 평가 생성
