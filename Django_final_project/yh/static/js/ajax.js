@@ -1,48 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-
-</head>
-<body>
-dsa
-<div id = "Progress_Loading"><!-- 로딩바 -->
-데이터 분석중입니다 잠시만 기다려주세요 ...
-<img src="../static/loading.gif"/>
-</div>
-
-
-
-<div>
-
-<a href="#" id="burger">버거</a>
-<input type="button" id="anal2">
-<div id="showData"></div>
-<div id="showData2"></div>
-<div id="showData3"></div>
-<div id="showData4"></div>
-
-<div id = "Progress_Loading2"><!-- 로딩바 -->
-데이터 분석중입니다 잠시만 기다려주세요 ...
-<img src="../static/loading.gif"/>
-</div>
-
-
-{{a}}
-
-{{yh_grap1|safe}}
-{{yh_grap2|safe}}
-{{yh_grap3|safe}}
-{{plot_div01|safe}}
-{{plot_div02|safe}}
-{{plot_div1|safe}}
-{{plot_div2|safe}}
-{{plot_div3|safe}}
-</div>
-</body>
-<script type="text/javascript">
 
 $(document).ready(function(){
 	$('#Progress_Loading').hide(); //첫 시작시 로딩바를 숨겨준다.
@@ -59,22 +14,22 @@ $(document).ready(function(){
 			maegraph = data['ks_graph_mae']
 			msegraph = data['ks_graph_mse']
 			lineargraph = data['ks_graph_linear']
-			graph1 = ['ks_graph1']
-			graph2 = ['ks_graph2']
+			graph1 = data['ks_graph1']
+			graph2 = data['ks_graph2']
 			loss = data['loss']
 			mae = data['mae']
 			mse = data['mse']
 			acc = data['acc']
 			
 			$('#maegraph').append(maegraph)	
-			$('#maegraph').append(msegraph)	
+			$('#msegraph').append(msegraph)	
 			$('#lineargraph').append(lineargraph)	
 			$('#graph1').append(graph1)	
 			$('#graph2').append(graph2)	
-			$('#loss').append(loss)	
-			$('#mae').append(mae)	
-			$('#mse').append(mse)	
-			$('#acc').append(acc)	
+			//$('#loss').append(loss)	
+			//$('#mae').append(mae)	
+			//$('#mse').append(mse)	
+			//$('#acc').append(acc)	
 				
 		},
 		error:function(){
@@ -132,6 +87,3 @@ $(document).ready(function(){
 		})
 
 })
-
-</script>
-</html>

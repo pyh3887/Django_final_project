@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.mainFunc),
     path('show',views.tensorFunc),
-    path('show2',views.Randomajax),  
+    path('show2',views.Randomajax),
+    path('show3',views.ksajax),    
 ]

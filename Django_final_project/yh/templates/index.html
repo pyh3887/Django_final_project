@@ -169,7 +169,7 @@ $(document).ready(function(){
             <div class="row align-items-center">
 				<div class="col-xl-11 col-lg-11 col-md-12 col-sm-12">
                     <div class="post-media wow fadeIn">
-                        <img class="img-fluid img-rounded">{{plot20_div|safe}}
+                        <img class="img-fluid img-rounded">{{heatmap|safe}}
                     </div><!-- end media -->
                 </div><!-- end col -->
 			</div>
@@ -219,7 +219,7 @@ $(document).ready(function(){
                                 <div class="col-md-12">
                                     <div class="pricing-table pricing-table-highlighted">
                                         <div class="pricing-table-features">
-                                            {{plot10_div|safe}}
+                                            {{cg_graph1|safe}}
                                         </div>
                                     </div>
                                 </div>
@@ -230,7 +230,7 @@ $(document).ready(function(){
                                 <div class="col-md-12">
                                     <div class="pricing-table pricing-table-highlighted">
                                         <div class="pricing-table-features">
-                                             {{plot11_div|safe}}
+                                             
                                         </div>
                                     </div>
                                 </div>
@@ -259,13 +259,13 @@ $(document).ready(function(){
                     <div class="post-media wow fadeIn">
                         <!--  <h2>전공별 학생 비율 그래프</h2>
                         <p>전공별 학생 비율을 알아보기 위해 파이차트로 표현하였습니다.</p>-->
-                        <img class="img-fluid img-rounded">{{pie_div|safe}}
+                        <img class="img-fluid img-rounded">{{yj_pie|safe}}
                     </div><!-- end messagebox -->
                 </div><!-- end col -->
 				
 				<div class="col-sm-5">
                     <div class="post-media wow fadeIn">
-                        <img class="img-fluid img-rounded">{{last_div|safe}}
+                        <img class="img-fluid img-rounded">{{yj_grap2|safe}}
                     </div><!-- end media -->
                 </div><!-- end col -->
                 <div class="col-sm-3">
@@ -292,13 +292,13 @@ $(document).ready(function(){
             <div class="row" style='background-color:#fff;margin-left:360px;'>
                 <div class="col-sm-offset-6 col-sm-3">
                    <div class="post-media wow fadeIn">
-                       <img class="img-fluid img-rounded">{{ab_plot|safe}}
+                       <img class="img-fluid img-rounded">{{yj_grap3|safe}}
                     </div><!-- end media -->
                 </div><!-- end col -->
 				
 				<div class="col-sm-3">
                     <div class="post-media wow fadeIn" style="margin-left:330px;">
-                       <img class="img-fluid img-rounded">{{plot_div|safe}}
+                       <img class="img-fluid img-rounded">{{yj_grap1|safe}}
                     </div><!-- end media -->
                 </div><!-- end col -->
 			</div>
@@ -321,7 +321,7 @@ $(document).ready(function(){
             <div class="row align-items-center">
 				<div class="col-xl-11 col-lg-11 col-md-12 col-sm-12">
                     <div class="post-media wow fadeIn">
-                        <img class="img-fluid img-rounded">{{plot5_div|safe}}
+                        <img class="img-fluid img-rounded">{{yj_scatter|safe}}
                     </div><!-- end media -->
                 </div><!-- end col -->
 			</div>
@@ -346,6 +346,7 @@ $(document).ready(function(){
 							<div class="row">
 								<div class="col-md-12 col-sm-12 text-right">
 									<div class="big-tagline">
+										{{yh_grap1|safe}}
 										<h2><strong>SmartEDU </strong> education College</h2>
 										<p class="lead">ff</p>
 											
@@ -366,6 +367,8 @@ $(document).ready(function(){
 							<div class="row">
 								<div class="col-md-12 col-sm-12 text-left">
 									<div class="big-tagline">
+										{{yh_grap2|safe}}
+										{{yh_grap3|safe}}
 										<h2 data-animation="animated zoomInRight">SmartEDU <strong>education school</strong></h2>
 										<p class="lead" data-animation="animated fadeInLeft">With Landigoo responsive landing page template, you can promote your all hosting, domain and email services. </p>
 											<a href="#" class="hover-btn-new"><span>Contact Us</span></a>
@@ -385,6 +388,7 @@ $(document).ready(function(){
 							<div class="row">
 								<div class="col-md-12 col-sm-12 text-center">
 									<div class="big-tagline">
+										
 										<h2 data-animation="animated zoomInRight"><strong>VPS Servers</strong> Company</h2>
 										<p class="lead" data-animation="animated fadeInLeft">1 IP included with each server 
 											Your Choice of any OS (CentOS, Windows, Debian, Fedora)
@@ -412,6 +416,8 @@ $(document).ready(function(){
 			</a>
 		</div>
 	</div>
+	
+<!--  ks -->
   
   <div id="carouselExampleControls2" class="carousel slide bs-slider box-slider" data-ride="carousel" data-pause="hover" data-interval="false" >
 		<!-- Indicators -->
@@ -428,6 +434,9 @@ $(document).ready(function(){
 							<div class="row">
 								<div class="col-md-12 col-sm-12 text-right">
 									<div class="big-tagline">
+									<div id='graph2'></div>
+										{{ks_graph2|safe}}
+										
 										<h2><strong>SmartEDU </strong> education College</h2>
 										<p class="lead">ff</p>
 											
@@ -448,6 +457,11 @@ $(document).ready(function(){
 							<div class="row">
 								<div class="col-md-12 col-sm-12 text-left">
 									<div class="big-tagline">
+										<div id="maegraph"></div>
+										<div id = 'msegraph'></div>
+						
+			
+										
 										<h2 data-animation="animated zoomInRight">SmartEDU <strong>education school</strong></h2>
 										<p class="lead" data-animation="animated fadeInLeft">With Landigoo responsive landing page template, you can promote your all hosting, domain and email services. </p>
 											<a href="#" class="hover-btn-new"><span>Contact Us</span></a>
@@ -467,6 +481,10 @@ $(document).ready(function(){
 							<div class="row">
 								<div class="col-md-12 col-sm-12 text-center">
 									<div class="big-tagline">
+									<div id="lineargraph"></div>
+									<div id="graph1"></div>
+										{{ks_graph_linear|safe}}{{ks_graph1|safe}}
+										
 										<h2 data-animation="animated zoomInRight"><strong>VPS Servers</strong> Company</h2>
 										<p class="lead" data-animation="animated fadeInLeft">1 IP included with each server 
 											Your Choice of any OS (CentOS, Windows, Debian, Fedora)
@@ -509,7 +527,7 @@ $(document).ready(function(){
 					<div class="dtab">
 						<div class="container">
 							<div class="row">
-								<div class="col-6">{{plot12_div|safe}}</div>
+								<div class="col-6">{{cg_graph2|safe}}</div>
 								<div class="col-6">dfkjdsfjdfbjdsfdkjfjkd</div>
 							</div><!-- end row -->            
 						</div><!-- end container -->
@@ -606,5 +624,7 @@ $(document).ready(function(){
 			visibleItems: 4
 		});
 	</script>
+	<script type="text/javascript" src="../static/js/ajax.js"></script>
+	
 </body>
 </html>
