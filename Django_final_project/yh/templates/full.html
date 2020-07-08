@@ -160,9 +160,9 @@
           </div>
           <!-- 시각화 자료 출력화면 끝 -->
 
-          <div id='section2' class='section' data-anchor='firstPage'>
+          <div id='section2' class='section' data-anchor='firstPage' style="background-image: url('../static/book1.jpg');">
             <div class="col-md-12">
-              <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+              <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel" data-interval="false">
                 <ol class="carousel-indicators">
                   <li data-target="#carouselExampleIndicators2" data-slide-to="0" class="active"></li>
                   <li data-target="#carouselExampleIndicators2" data-slide-to="1"></li>
@@ -171,13 +171,23 @@
                 <div class="carousel-inner">
                   <div class="carousel-item active">
                     <div class="container-fluid w-100">
-                      <img class="d-block" src="http://1x1px.me/FFFFFF-0.png" alt="&nbsp;" style="width: 95vw; height: 95vh;" />
+                    
+                     <div class="d-block" style="width: 95vw; height: 95vh;">
+                     
+                      <br><br><br><h1 style="text-align: left;">&nbsp;&nbsp;&nbsp;Data Analysis </h1>
                       <div class="carousel-caption">
-                      	{{yh_grap1|safe}}
-                        <h1>Slide 1</h1>
+                       <div class="row">
+      					  <div class="col-sm-8">{{yh_grap1|safe}}</div>
+      					   <div class="col-sm-4" style="margin-top: 80px"><h1>성적과 다른 값들과의 중요도</h1>
+      					   <p>성적 분석에 앞서 , 현재 DataFrame의 모든 Feature들과 성적 간의 중요도 검사를 해보았습니다. 
+      					   그 결과 앞서 HeatMap의 상관관계를 통해 알수 있듯, 과정반복수,발표수,토론참여수,공지사항확인수이 성적에      					   
+      					   성적에 영향을 미치는 가장 중요한 데이터로 파악할수 있습니다.</div>
+   						</div>	
                         <p>Bootstrap 3 still features a 12-column grid, but many of the CSS class names have completely changed.</p>
+                      	
                         <p><a class="btn btn-large btn-primary" href="#">Learn more</a>
                         </p>
+                      </div>
                       </div>
                     </div>
                   </div>
@@ -185,7 +195,7 @@
                     <div class="container-fluid w-100">
                       <img class="d-block" src="http://1x1px.me/FFFFFF-0.png" alt="&nbsp;" style="width: 95vw; height: 95vh;" />
                       <div class="carousel-caption">
-                      {{yh_grap2|safe}}{{yh_3D|safe}}
+                      {{yh_grap2|safe}}<!-- {{yh_3D|safe}}-->
                         <h1>Slide 2</h1>
                         <p>Bootstrap 3 still features a 12-column grid, but many of the CSS class names have completely changed.</p>
                         <p><a class="btn btn-large btn-primary" href="#">Learn more</a>
@@ -345,7 +355,7 @@
       $(document).ready(function() {
         $('#fullpage').fullpage({
           navigation: true,
-          sectionsColor:['#B9D3EE','#B9D3EE','#B9D3EE','#B9D3EE','#B9D3EE'],
+          sectionsColor:['#B9D3EE','#B9D3EE','#B09C93','#B9D3EE','#B9D3EE'],
         });      
         
       });
@@ -356,6 +366,8 @@
       });
     </script>
     
-    
+    <!-- 
     <script type="text/javascript" src="../static/js/ajax.js"></script>
+    -->
 </body>
+</html>

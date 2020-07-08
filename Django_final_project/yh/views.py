@@ -20,8 +20,7 @@ from sklearn.neighbors import KNeighborsRegressor
 from xgboost import XGBRegressor
 import xgboost as xgb
 from sklearn.metrics import accuracy_score
-
-
+from sklearn import metrics
 from tensorflow.keras import layers
 from django.shortcuts import render
 import tensorflow as tf
@@ -199,7 +198,7 @@ def mainFunc(request):
     plot11_div = plot(fig9,output_type='div') 
     
     
-    
+
     # 랜덤포레스트 사용
     # 모델 평가 생성
     data = pd.read_csv('https://raw.githubusercontent.com/pyh3887/Django_final_project/master/student.csv', encoding='euc-kr')
@@ -340,7 +339,10 @@ def mainFunc(request):
 
 #     print(studentData[studentData['성적']=='M'].groupby(['전공']).size())
     
-    
+
+
+#--------------------------------------
+
     #박윤호
     data = pd.read_csv('https://raw.githubusercontent.com/pyh3887/Django_final_project/master/education.csv',encoding='euc-kr')
 
@@ -367,6 +369,7 @@ def mainFunc(request):
     
     pred = fit_model.predict(X_train)
     
+    #yh_acc = accuracy_score(y_train, y_test)
     #print('예측값 : ', pred[:5])
     #print('실제값 : ', np.array(test_y[:5]))
     
@@ -384,51 +387,22 @@ def mainFunc(request):
         x=values,
         y=keys,
         marker=dict(
-            color='rgba(50, 171, 96, 0.6)',
-            line=dict(
-                color='rgba(50, 171, 96, 1.0)',
-                width=1),
-        ),
+            color='rgba(185, 211, 238, 0.6)',         
+            
+        ),      
         name='성적과 관련된 중요도 그래프',
         orientation='h',
+        
     ))
     
-    yh_fig1.update_layout(
-        title='성적과 관련된 중요도 그래프 ',
-        yaxis=dict(
-            showgrid=False,
-            showline=False,
-            showticklabels=True,
-            domain=[0, 0.85],
-        ),
-        yaxis2=dict(
-            showgrid=False,
-            showline=True,
-            showticklabels=False,
-            linecolor='rgba(102, 102, 102, 0.8)',
-            linewidth=2,
-            domain=[0, 0.85],
-        ),
-        xaxis=dict(
-            zeroline=False,
-            showline=False,
-            showticklabels=True,
-            showgrid=True,
-            domain=[0, 0.42],
-        ),
-        xaxis2=dict(
-            zeroline=False,
-            showline=False,
-            showticklabels=True,
-            showgrid=True,
-            domain=[0.47, 1],
-            side='top',
-            dtick=25000,
-        ),
+    yh_fig1.update_layout(        
+              
         legend=dict(x=0.029, y=1.038, font_size=10),
         margin=dict(l=100, r=20, t=70, b=70),
-        paper_bgcolor='rgb(248, 248, 255)',
-        plot_bgcolor='rgb(248, 248, 255)',
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        font=dict(family='Courier New, monospace', color='#000',),
+        height = 700
     )
     
 
