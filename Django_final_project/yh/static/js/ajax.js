@@ -20,6 +20,8 @@ $(document).ready(function(){
 			mae = data['mae']
 			mse = data['mse']
 			acc = data['acc']
+			acc = data['acc']
+			acc = data['acc']
 			
 			$('#maegraph').append(maegraph)	
 			$('#msegraph').append(msegraph)	
