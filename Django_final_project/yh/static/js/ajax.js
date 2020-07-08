@@ -1,5 +1,6 @@
 
 $(document).ready(function(){
+	
 	$('#Progress_Loading').hide(); //첫 시작시 로딩바를 숨겨준다.
 	$('#Progress_Loading2').hide();
 	
