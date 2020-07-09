@@ -25,5 +25,7 @@ urlpatterns = [
     path('yj/',include('yj.urls')),
     path('yh/',include('yh.urls')),
     path('cg/',include('cg.urls')),
-    path('show',views.tensorFunc), 
+    path('show',views.tensorFunc),
+    path('show2',views.Randomajax),  
+    path('show3',views.ksajax)
 ]

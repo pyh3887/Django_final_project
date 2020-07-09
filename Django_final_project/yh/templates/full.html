@@ -1,0 +1,676 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS -->
+  <title>Bootstrap Demo</title>
+  <link href="../static/css/form.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+  <link rel="stylesheet" href="{% static 'fullpage/jquery.fullpage.min.css'%}">
+  <script src="{% static 'fullpage/jquery.fullpage.min.js'%}"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.plyr.io/2.0.16/plyr.css">
+  <link rel="stylesheet" href="../static/css/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+   
+   <!-- Font Awesome -->
+<link href="../static/css/form.css" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<!-- Google Fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+<!-- Bootstrap core CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+  <style type="text/CSS">
+    .video-container { position: relative; width: 100vw; height: 100vh; } .video-container iframe, .video-container object, .video-container embed { position: relative; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; }
+    
+    #fp-nav ul li a span{
+   background-color:#0f4c81;
+   }
+   #fp-nav ul li .fp-tooltip{
+   color:#0f4c81
+   }
+  .article-title {
+    font-size: 4rem;
+      font-weight: bold;
+    font-family: sans-serif;
+    color: white;
+    background: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    
+   body {
+  background-color: #bedcff;
+  font-family: Helvetica;
+  font-weight: bold;
+}
+.container {
+  padding: 100px 20px 0;
+  max-width: 960px;
+  margin: 0 auto;
+}
+h1 {
+  margin: 0;
+  text-align: center;
+  font-size: 200px;
+  overflow: hidden;
+  line-height: 1;
+}
+h1 span {
+  display: block;
+  animation: reveal 1.5s cubic-bezier(0.77, 0, 0.175, 1) 0.5s;
+}
+
+@keyframes reveal {
+  0% {
+    transform: translate(0,100%);
+  }
+  100% {
+    transform: translate(0,0);
+  }
+}
+
+  </style>
+
+</head>
+ 
+
+<body>
+  <!-- Content here -->
+  <div class="container-fluid" style="margin-left: -15px;">
+    <div class="row">
+     
+     
+     
+     
+     
+     
+      <div class="row">
+        <div id="fullpage">
+        <!--메인화면  -->
+      <!--메인화면  시각화-->
+        <div id='section1' class="section"  data-anchor='Page1'  style="background-image:url('{%static "images/student2.png"%}');">
+            
+              <div class="container" style="margin-left:626px;margin-top:500px;">
+			    <div class="row"></div>
+			    <div class="row" style="margin-left:514px;">
+			        <div class="col-xs-12">
+			        <a href="#Page2" class="btn btn-dark btn-lg" style="width:300px;"><span>Visualization</span></a>
+			        <a href="#Page3" class="btn btn-dark btn-lg" style="width:300px;"><span>Data Analysis</span></a></div>
+			    </div>
+			    <div class="row"></div>
+			</div>
+          </div>
+        <!-- 시각화 자료 출력화면 시작 -->
+          <!-- 시각화 자료 출력화면 시작 -->
+          <div id='section2' class='section' data-anchor='Page2' style="background-image:url('{%static "images/yj.png"%}');">
+            <div class="col-md-12">
+              <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
+                <ol class="carousel-indicators">
+                  <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                  
+                </ol>
+                <div class="carousel-inner" >
+                
+                  <div class="carousel-item active">
+                  
+                    <div class="container-fluid w-100">
+                    
+                      <div class="d-block" style="width: 95vw; height: 95vh;">
+                      <br><br><br>
+                      <h1 style="color:#fff;margin-left:100px;">Visualization</h1>
+                      <div class="carousel-caption" style="color:#fff">
+                      
+                      <div class="row">
+                    <div class="col-sm-8" style="font-family: 'Noto Sans KR', 'sans-serif';font-weight:bold">{{heatmap|safe}}</div>
+                    <div class="col-sm-4" style="background-color:rgba(0,0,0,0.8);height:300px;margin-top:300px;">
+                       <h1 style="font-size:45px;margin-top:30px;">HeatMap</h1><br>
+                       <p><font style="font-size:25px;">피어슨 상관계수로 상관관계를 
+                       분석하고 확인하여 상관관계가 높은 것들끼리 
+                       묶어서 데이터분석을 할 수 있습니다.</font></p></div>
+                      </div>
+                        
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="container-fluid w-100">
+                       <div class="d-block" style="width: 95vw; height: 95vh;">
+                      <div class="carousel-caption" style="color:#fff">
+                        <div class="row">
+                 <div class="col-sm-8" style="font-family: 'Noto Sans KR', 'sans-serif';font-weight:bold;">{{cg_graph1|safe}}</div>
+                 <div class="col-sm-offset-0 col-sm-4" style="margin-top:150px;background-color:rgba(0,0,0,0.8);height:100px;" ><font style="font-size:35px;font-weight:bold;">국가별 성적 시각화</font></div>
+                 <div class="col-sm-offset-0 col-sm-4" style="margin-top:150px;background-color:rgba(0,0,0,0.8);height:100px;"><font style="font-size:35px;font-weight:bold;">국가별 성별에 따른 <br>성적 시각화</font></div>
+                 <div class="col-sm-8" style="font-family: 'Noto Sans KR', 'sans-serif';font-weight:bold;">{{cg_graph3|safe}}</div>
+             </div>
+                      <!--  
+                         <div class="row">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6"> </div>
+        <div class="col-sm-6">{{pie_div|safe}}</div>
+        <div class="col-sm-6">{{last_div|safe}}</div>
+    </div>-->
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item" >
+                  
+                    <div class="container-fluid w-100">
+                     
+                      <div class="d-block" style="width: 95vw; height: 95vh;">
+                      <div class="carousel-caption" style="color:#fff;margin-bottom:100px;">
+                         <div class="row">
+    
+        <div class="col-sm-5" style="font-family: 'Noto Sans KR', 'sans-serif';font-weight:bold;">{{yj_pie|safe}}</div>
+         <div class="col-sm-offset-1 col-sm-6" style="font-family: 'Noto Sans KR', 'sans-serif';font-weight:bold;">{{yj_grap2|safe}}</div>
+    </div>
+                        <font style='font-size:50px;font-weight:bold;background-color:#000'>전공에 관한 시각화</font>
+                        
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="container-fluid w-100">
+                     <div class="d-block" style="width: 95vw; height: 95vh;">
+                      <div class="carousel-caption" style="color:#fff">
+                      
+                      <div class="row">
+        <div class="col-sm-offset-1 col-sm-5"><font style="font-size:30px;font-weight:bold;color:#fff;background-color:#000;font-family: 'Noto Sans KR', 'sans-serif';">결석 비율에 따른<br> 성적 비율</font><br>{{yj_grap3|safe}}</div>
+        <div class="col-sm-offset-0 col-sm-5"  style="margin-left:200px;"><font style="font-size:30px;font-weight:bold;color:#fff;background-color:#000;font-family: 'Noto Sans KR', 'sans-serif';">부모님의 학교 만족도 비율에 따른<br> 성적 비율</font><br>{{yj_grap1|safe}}</div>
+    </div>
+                       
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="container-fluid w-100">
+                     <div class="d-block" style="width: 95vw; height: 95vh;">
+                      <div class="carousel-caption" style="color:#fff">
+                      <div class="row">
+                    <div class="col-sm-8" style="font-family: 'Noto Sans KR', 'sans-serif';font-weight:bold;">{{yj_scatter|safe}}</div>
+                    <div class="col-sm-4" style="background-color:rgba(0,0,0,0.8);height:300px;margin-top:300px;"><h1 style="padding-top:30px;">Scatter</h1><br>
+                       <p><font style="font-size:25px;">위 heatmap에서 상관관계가<br> 높은 것들로 4개 추려서 시각화.<br>
+                    scatter_matrix이용.</font></p></div>
+                      </div>
+                      
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+               <span class="sr-only">Previous</span>
+               </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+               <span class="carousel-control-next-icon" aria-hidden="true"></span>
+               <span class="sr-only">Next</span>
+               </a>
+              </div>
+            </div>
+          </div>
+          <!-- 시각화 자료 출력화면 끝 -->
+          <!-- 시각화 자료 출력화면 끝 -->
+
+          <div id='section3' class='section' data-anchor='Page3' style="background-image: url('../static/images/yh_background.png');opacity: 0.2, data-aos="fade-right"">
+            <div class="col-md-12">
+              <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel" data-interval="false">
+                <ol class="carousel-indicators">
+                  <li data-target="#carouselExampleIndicators2" data-slide-to="0"></li>
+                  <li data-target="#carouselExampleIndicators2" data-slide-to="1" class="active"></li>
+                  <li data-target="#carouselExampleIndicators2" data-slide-to="2" ></li>
+                  <li data-target="#carouselExampleIndicators2" data-slide-to="3"></li>
+                  
+                </ol>
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <div class="container-fluid w-100">
+                    
+                     <div class="d-block" style="width: 95vw; height: 95vh;">
+                     
+                      <br><br><br><h1 style="text-align: left;">&nbsp;&nbsp;&nbsp;Data Analysis </h1>
+                      <div class="carousel-caption">        
+                                    
+                       <div class="row"  style="margin-bottom: 65px">
+      					  <div class="col-sm-8 " style="font-family: 'Noto Sans KR', sans-serif;">{{yh_grap1|safe}}</div>
+      					   <div class="col-sm-4" style="margin-top: 50px"><h1 style="font-family: 'Noto Sans KR', sans-serif; font-size: 60px">Feature Importance</h1><br>
+      					   
+							<div class="container">
+							<div id="expand" class="row">
+								<a href="javascript:void(0)" id="comment-reply">Learn more</a>
+							</div>
+							
+							<div id="nested" class="row m-2 "  style="display:none;width: 600px">
+							    <p style="color:black ;font-family: 'Noto Sans KR', sans-serif; font-size: 30px;">성적 분석에 앞서,현재 <b style="color: red">DataFrame</b>의 모든 <b style="color: green">Feature</b>들과 성적 간의 중요도 검사를 해보았습니다. 
+	      					   그 결과 앞서<b style="color: #FF1493"> HeatMap</b>의 상관관계를 통해 알수 있듯, <br><ins style="font-weight:bold">과정반복수,발표수,토론참여수,공지사항확인수</ins>이 성적에      					   
+	      					   성적에 영향을 미치는 가장 중요한 데이터로 파악할수 있습니다.</p>							    
+							</div>
+						</div>
+      					 </div>
+   						</div>	                      
+                        
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="container-fluid w-100">
+                      <div class="d-block" style="width: 95vw; height: 95vh;">
+                      <div class="carousel-caption">
+                      	
+                          <div class="row" style="margin-bottom: 95px">
+                          
+      					  <div class="col-xs-12" style="font-family: 'Noto Sans KR', sans-serif">{{yh_grap2|safe}}</div>
+      					
+
+       					 <div class="col-xs-12" style="width: 100%">
+       					   <div style="float: right">
+      					  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" > 
+						  3D 시각화
+						  </button>
+						  </div><br>
+       					 <p style="font-family: 'Noto Sans KR', sans-serif;font-size: 30px;color: black"> 
+       					 <b style="color: red;">Bubble chart</b>를 통해 시각화한 결과.<ins style="font-weight:bold" >4개의 요인의 값이 높을수록</ins><br>성적이 높은학생의 비중이 높은걸 확인할수 있습니다.</p>      					 
+       					 </div>
+	                        
+   						 </div>     
+                        
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="container-fluid w-100">
+                      <div class="d-block" style="width: 95vw; height: 95vh;">
+                      <div class="carousel-caption">
+						                      
+						<div class="container">
+					    <div class="row">
+					        <div class="col-xs-12" style="padding-bottom: 50px">
+					        <h1 class="article-title" style="font-family: 'Noto Sans KR', sans-serif;font-size: 80px;">성적을 분석해 드릴게요</h1>
+					        </div>
+					        <div class="col-md-6">
+					        <form  style="font-family: 'Noto Sans KR', sans-serif">
+						  <h1>성적을 입력하세요</h1>
+						  <div class="question">
+						    <input id="raisehandcount" type="text" required numberOnly/>
+						    <label>발표 수</label>
+						  </div>
+						  <div class="question">
+						    <input id='enterclass' type="text" required numberOnly/>
+						    <label>과정 반복 수</label>
+						  </div>
+						  <div class="question">
+						    <input id="checkcount" type="text" required numberOnly/>
+						    <label>새 공지사항 확인 수</label>
+						  </div>
+						  <div class="question">
+						    <input id="discount" type="text" required numberOnly/>
+						    <label>토론 참여 수</label>
+						  </div>
+						  <button id="yh_anal1">Start</button>
+						</form>
+                        
+					        </div>
+					        <div class="col-md-6" style="font-family: 'Noto Sans KR', sans-serif">					        
+					        <div id="showData2"></div>
+							<div id="showData1"></div>
+							<div id = "Progress_Loading" style="font-family: 'Noto Sans KR', sans-serif;margin-top: 100px"><!-- 로딩바 -->
+							<b style="font-family: 'Noto Sans KR', sans-serif;font-size: 25px ">데이터 분석중입니다 잠시만 기다려주세요 </b>
+							<img src="../static/loading.gif"/>
+							</div>
+					        </div>
+					        
+					        
+					    </div>
+					</div>
+                       
+                        
+                    
+						
+						
+
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+               <span class="sr-only">Previous</span>
+               </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators2" role="button" data-slide="next">
+               <span class="carousel-control-next-icon" aria-hidden="true"></span>
+               <span class="sr-only">Next</span>
+               </a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ks START~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+          <div id='section4' class='section' data-anchor='Page4' style="background-image: url('../static/images/ksimg.png');">
+            <div class="col-md-12">
+              <div id="carouselExampleIndicators3" class="carousel slide" data-ride="carousel" data-interval="false">
+                <ol class="carousel-indicators">
+                  <li data-target="#carouselExampleIndicators3" data-slide-to="0"></li>
+                  <li data-target="#carouselExampleIndicators3" data-slide-to="1"></li>
+                  <li data-target="#carouselExampleIndicators3" data-slide-to="2" class="active"></li>
+                  <li data-target="#carouselExampleIndicators3" data-slide-to="3"></li>
+                  
+                </ol>
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <div class="container-fluid w-100">
+                      <div class="d-block" style="width: 95vw; height: 95vh;">
+                      <div class="carousel-caption">
+                      <div class="wait" style="margin-bottom: 300px">
+                         <img src="../static/images/loading.gif">
+                      </div>
+                      <div class="kstitle" style="margin: auto; color: white; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;"></div>
+                        <div class="row">
+                            <div id="maegraph" class="col-sm-7"></div>
+                           <div class="col-sm-5" style="margin: auto; color: black; background-color: rgba(255,255,255,0.5);">
+                              <div id="maetext"></div>
+                           </div>
+                        </div>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="container-fluid w-100">
+                      <div class="d-block"  style="width: 95vw; height: 95vh;">
+                      <div class="carousel-caption">
+                      <div class="wait" style="margin-bottom: 300px">
+                         <img src="../static/images/loading.gif">
+                      </div>
+                      <div class="kstitle" style="margin: auto; color: white; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;"></div>
+                        <div class="row">
+                            <div id="msegraph" class="col-sm-7"></div>
+                           <div class="col-sm-5" style="margin: auto; color: black; background-color: rgba(255,255,255,0.5);">
+                              <div id="msetext"></div>
+                           </div>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="container-fluid w-100">
+                      <div class="d-block" style="width: 95vw; height: 95vh;">
+                      <div class="carousel-caption">
+                      <div class="wait" style="margin-bottom: 300px">
+                         <img src="../static/images/loading.gif">
+                      </div>
+                      <div class="kstitle" style="margin: auto; color: white; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;"></div>
+                         <div class="row">
+                            <div id="lineargraph" class="col-sm-7"></div>
+                            <div class="col-sm-5" style="margin: auto; color: black; background-color: rgba(255,255,255,0.5);">
+                               <div id="lineartext"></div>
+                            </div>
+                         </div>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="container-fluid w-100">
+                      <div class="d-block"  style="width: 95vw; height: 95vh;">
+                      <div class="carousel-caption">
+                      <div class="wait" style="margin-bottom: 300px">
+                         <img src="../static/images/loading.gif">
+                      </div>
+                      <div class="kstitle" style="margin: auto; color: white; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;"></div>
+                         <div class="row">
+                            <div id="errgraph" class="col-sm-7"></div>
+                            <div class="col-sm-5" style="margin: auto; color: black; background-color: rgba(255,255,255,0.5);">
+                               <div id="errtext"></div>
+                            </div>
+                         </div>
+                      </div>
+                      </div>
+                      
+                    </div>
+                   </div>
+                   <div class="carousel-item">
+                    <div class="container-fluid w-100">
+                      <div class="d-block" style="width: 95vw; height: 95vh;">
+                      <div class="carousel-caption">
+                      <div class="wait" style="margin-bottom: 300px">
+                         <img src="../static/images/loading.gif">
+                      </div>
+                      <div class="kstitle2" style="margin: auto; color: white; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;"></div>
+                         <div class="row">
+                            <div id="logitgraph" class="col-sm-7"></div>
+                            <div class="col-sm-5" style="margin: auto; color: black; background-color: rgba(255,255,255,0.5);">
+                               <div id="logittext"></div>
+                            </div>
+                         </div>
+                      </div>
+                      </div>
+                    </div>
+                   </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators3" role="button" data-slide="prev">
+               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+               <span class="sr-only">Previous</span>
+               </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators3" role="button" data-slide="next">
+               <span class="carousel-control-next-icon" aria-hidden="true"></span>
+               <span class="sr-only">Next</span>
+               </a>
+              </div>
+            </div>
+          </div>
+          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ks END~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+          <div id='section5' class='section' data-anchor='page5' style="background-image: url('../static/images/cgbook1.png')">
+            <div class="col-md-12">
+              <div id="carouselExampleIndicators4" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                  <li data-target="#carouselExampleIndicators4" data-slide-to="0" class="active"></li>
+                  <li data-target="#carouselExampleIndicators4" data-slide-to="1"></li>
+                  <li data-target="#carouselExampleIndicators4" data-slide-to="2"></li>
+                  <li data-target="#carouselExampleIndicators4" data-slide-to="3"></li>
+                  <li data-target="#carouselExampleIndicators4" data-slide-to="4"></li>
+                  
+                </ol>
+                       <div class="carousel-inner">
+                
+                  <div class="carousel-item active">
+                    <div class="container-fluid w-100">
+                      <img class="d-block" src="http://1x1px.me/FFFFFF-0.png" alt="&nbsp;" style="width: 95vw; height: 85vh; style="rgba(0, 0, 0, 0.6);" />
+                      <div class="carousel-caption"style="margin-left:0%">
+                       <div class="row">
+                       <div class="col-sm-7">
+                       {{cg_graph7|safe}}<br></div>
+                       <div class="col-sm-5" style = "background-color: rgba(255,255,255,0.7); top: 50px; margin:auto; position: inherit;"><br>
+                  <h4 style="font-size:20px; font-weight: bold; color: midnightblue;"><br>새 공지사항 확인 횟수로 결석인원 분석</h4><br><br>                       
+                       </div><br>
+                       <div class="col-sm-7">
+                       {{cg_graph71|safe}}<br></div>
+                       <div class="col-sm-5" style = "background-color: rgba(255,255,255,0.7); top: 50px; margin:auto; position: inherit;"><br>
+                  <h4 style="font-size:20px; font-weight: bold; color: midnightblue;"><br>토론 참여 횟수로 결석인원 분석</h4><br><br>                       
+                       </div><br>
+                        <div class="col-sm-7">
+                       {{cg_graph72|safe}}<br></div>
+                       <div class="col-sm-5" style = "background-color: rgba(255,255,255,0.7); top: 50px; margin:auto; position: inherit;">
+                  <h4 style="font-size:20px; font-weight: bold; color: midnightblue;"><br><br>발표 횟수로 결석인원 분석 </h4><br><br>                       
+                       </div>
+                       </div>
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="container-fluid w-100">
+                      <img class="d-block" src="http://1x1px.me/FFFFFF-0.png" alt="&nbsp;" style="width: 95vw; height: 75vh;" />
+                      <div class="carousel-caption"style="margin-left:0%">
+                       <!--  {{cg_graph73|safe}}  -->
+                       <!-- {{cg_graph2|safe}} -->
+                       <div class="row">
+                       <div class="col-sm-7">
+                       {{cg_graph74|safe}}
+                       </div><div class="col-sm-5" style = "background-color: rgba(255,255,255,0.7);"><br><br><br><br><br>
+                  <h2 style="color: black;">3D 모델로 시각화</h2><br><br>
+                  <h4 style="font-size:20px; font-weight: bold; color: midnightblue;">앞서 사용한 데이터들을 전부 사용하여 3D 모델로 출력 </h4><br><br>
+                  <h4 style="font-size:20px; font-weight: bold; color: midnightblue;">해석1. 결석 횟수가 많은 학생들은 상대적으로 학교생활에 적극적이지 않다.</h4><br>
+                  <h4 style="font-size:20px; font-weight: bold; color: midnightblue;">해석2. 여학생들은 상대적으로 7일 이상 결석하지 않음</h4><br>
+                  <h4 style="font-size:20px; font-weight: bold; color: midnightblue;">해석3. 반면, 남학생들은 상대적으로 7일 이상 결석하는 인원이 더 많음.</h4><br>
+                  <h4 style="font-size:20px; font-weight: bold; color: midnightblue;">수업에 참여도가 높을수록 상대적으로 결석일수가 7일 이하인 것을 확인 할 수 있다. </h4><br>
+                  
+                  
+                       </div>
+                  
+               </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="container-fluid w-100">
+                                                 
+                      <div class="d-block"  style="width: 95vw; height: 75vh;">
+                      <div class="carousel-caption" style="height:70vh">
+                      <h1>SKlearn의 주요 모델에 학습시켜 임의의 값으로 결과 출력</h1><br>
+                      {{cg_chart|safe}}
+                      <br><br>
+					                      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+					  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+					    <span class="navbar-toggler-icon"></span>
+					  </button>
+					
+					  <div class="collapse navbar-collapse" id="navbarColor03" style="margin-left:25%">
+					    <form class="form-inline my-2 my-lg-0">
+					    <input class="form-control mr-sm-2" type="text" placeholder="새 공지사항 확인 수" id="checkcount">
+					    <input class="form-control mr-sm-2" type="text" placeholder="발표 수" id="raisehandcount">
+					      <input class="form-control mr-sm-2" type="text" placeholder="토론 참여 수" id="discount">
+					      <button class="btn btn-secondary my-2 my-sm-0" type="submit" id="btnSubmit">예측하기</button>
+					    </form>
+					    <br><br>
+					  </div>
+					</nav><br><br>
+					                   <h1>결 과 출 력</h1><br>
+					    <div id="predictShow"></div>
+					                      </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators4" role="button" data-slide="prev">
+               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+               <span class="sr-only">Previous</span>
+               </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators4" role="button" data-slide="next">
+               <span class="carousel-control-next-icon" aria-hidden="true"></span>
+               <span class="sr-only">Next</span>
+               </a>
+              </div>
+            </div>
+          </div>
+          
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content" style="width:710px;right: 50px;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle" style="font-family: 'Noto Sans KR', sans-serif">3D VERISON</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="font-family: 'Noto Sans KR', sans-serif">
+      <div style="margin-left: 48px;">
+        {{yh_3D|safe}}
+      </div>
+      </div>
+     
+    </div>
+  </div>
+</div>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script src="https://cdn.plyr.io/2.0.16/plyr.js"></script>
+    <script>
+      $(document).ready(function() {
+    	  $('#fullpage').fullpage({
+              navigation: true,
+              navigationTooltips:['Main','Visual','Analysis1','Analysis2','Analysis3'],
+              
+            }); 
+ 		
+        
+        
+      });
+    </script>
+    <script>
+      plyr.setup({
+        controls: ['play-large']
+      });
+    </script>
+    <script type="text/javascript">
+
+    $(function() {
+       $("a#comment-reply").click(function() {
+          // remove classes from all
+          $("div#nested").closest("active");
+          
+         
+             /*   $("a").closest("div").css({ 
+                    "color": "green", 
+                    "border": "2px solid green" 
+                }); 
+             */
+             
+          /*      $("a").closest("div").siblings("#nested").css({ 
+                    "color": "red", 
+                    "border": "2px solid green" 
+                }); */
+          
+          
+               /* $(this).closest("div").siblings("#nested").css({ 
+                    "color": "red", 
+                    "border": "2px solid green" 
+                });
+          */
+          $("a#comment-reply").closest("div").siblings("#nested").fadeOut();
+
+          
+          $(this).closest("div").siblings("#nested").fadeIn();
+          
+           $("a#comment-reply").hide()
+          // add class to the one we clicked
+          
+         // $("a#comment-reply").fadeOut();
+           
+         
+
+       });
+    });
+    	
+    	
+    </script>
+    
+    
+    <script type="text/javascript" src="../static/js/ajax.js"></script>
+   
+</body>
+</html>

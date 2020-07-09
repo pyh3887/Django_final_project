@@ -1,0 +1,366 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS -->
+  <title>Bootstrap Demo</title>
+  
+  <script src="{% static 'fullpage/jquery.fullpage.min.js'%}"></script>
+  <link rel="stylesheet" href="{% static 'fullpage/jquery.fullpage.min.css'%}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.plyr.io/2.0.16/plyr.css">
+   <link rel="stylesheet" href="../static/css/main.css">
+   
+  <style type="text/CSS">
+    .video-container { position: relative; width: 100vw; height: 100vh; } .video-container iframe, .video-container object, .video-container embed { position: relative; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; }
+  </style>
+</head>
+
+<body style="background-color: #000000;">
+  <!-- Content here -->
+  <div class="container-fluid" style="margin-left: -15px;">
+    <div class="row">
+      <div class="col-md-12 w-100">
+        <nav class="navbar navbar-expand-lg  navbar-dark" style="background-color: rgba(0,0,0,.6); position: fixed; z-index: 999; width: 100vw;">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#firstPage">Navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+               <span class="navbar-toggler-icon"></span>
+               </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#firstPage">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#secondPage">Vision</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled" href="#thirdPage">Contact</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        
+        <!-- navbar 끝 -->
+      </div>
+      <div class="row">
+        <div id="fullpage">
+        <!--메인화면  -->
+        <div id='section1' class="section" data-anchor='secondPage'>
+            <div class="col-md-12" style="margin-left: 15px;">
+              <div class="video-container" style="background-image:url('{%static "images/student2.jpg"%}');">
+                
+              </div>
+            </div>
+          </div>
+        
+          <div id='section2' class='section' data-anchor='firstPage'>
+            <div class="col-md-12">
+              <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                  <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+                </ol>
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <div class="container-fluid w-100">
+                      <img class="d-block" src="http://1x1px.me/FFFFFF-0.png" alt="&nbsp;" style="width: 95vw; height: 95vh;" />
+                      <div class="carousel-caption">
+                     	 {{heatmap|safe}
+                        <h1>Slide 1</h1>
+                        <p>Bootstrap 3 still features a 12-column grid, but many of the CSS class names have completely changed.</p>
+                        <p><a class="btn btn-large btn-primary" href="#">Learn more</a>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="container-fluid w-100">
+                      <img class="d-block" src="http://1x1px.me/FFFFFF-0.png" alt="&nbsp;" style="width: 95vw; height: 95vh;" />
+                      <div class="carousel-caption">
+	                    {{cg_graph1|safe}} {{cg_graph3|safe}}
+                        <h1>Slide 2</h1>
+                        <p>Bootstrap 3 still features a 12-column grid, but many of the CSS class names have completely changed.</p>
+                        <p><a class="btn btn-large btn-primary" href="#">Learn more</a>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="container-fluid w-100">
+                      <img class="d-block" src="http://1x1px.me/FFFFFF-0.png" alt="&nbsp;" style="width: 95vw; height: 95vh;" />
+                      <div class="carousel-caption">
+                      {{yj_pie|safe}} {{yj_grap2|safe}}
+                        <h1>Slide 3</h1>
+                        <p>Bootstrap 3 still features a 12-column grid, but many of the CSS class names have completely changed.</p>
+                        <p><a class="btn btn-large btn-primary" href="#">Learn more</a>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="container-fluid w-100">
+                      <img class="d-block" src="http://1x1px.me/FFFFFF-0.png" alt="&nbsp;" style="width: 95vw; height: 95vh;" />
+                      <div class="carousel-caption">
+                     {{yj_grap3|safe}} {{yj_grap1|safe}}
+                        <h1>Slide 3</h1>
+                        <p>Bootstrap 3 still features a 12-column grid, but many of the CSS class names have completely changed.</p>
+                        <p><a class="btn btn-large btn-primary" href="#">Learn more</a>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="container-fluid w-100">
+                      <img class="d-block" src="http://1x1px.me/FFFFFF-0.png" alt="&nbsp;" style="width: 95vw; height: 95vh;" />
+                      <div class="carousel-caption">
+                      {{yj_scatter|safe}}
+                        <h1>Slide 3</h1>
+                        <p>Bootstrap 3 still features a 12-column grid, but many of the CSS class names have completely changed.</p>
+                        <p><a class="btn btn-large btn-primary" href="#">Learn more</a>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+               <span class="sr-only">Previous</span>
+               </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+               <span class="carousel-control-next-icon" aria-hidden="true"></span>
+               <span class="sr-only">Next</span>
+               </a>
+              </div>
+            </div>
+          </div>
+          <div id='section2' class='section' data-anchor='firstPage'>
+            <div class="col-md-12">
+              <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                  <li data-target="#carouselExampleIndicators2" data-slide-to="0" class="active"></li>
+                  <li data-target="#carouselExampleIndicators2" data-slide-to="1"></li>
+                  <li data-target="#carouselExampleIndicators2" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <div class="container-fluid w-100">
+                      <img class="d-block" src="http://1x1px.me/FFFFFF-0.png" alt="&nbsp;" style="width: 95vw; height: 95vh;" />
+                      <div class="carousel-caption">
+                      {{yh_grap1|safe}}
+                        <h1>Slide 1</h1>
+                        <p>Bootstrap 3 still features a 12-column grid, but many of the CSS class names have completely changed.</p>
+                        <p><a class="btn btn-large btn-primary" href="#">Learn more</a>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="container-fluid w-100">
+                      <img class="d-block" src="http://1x1px.me/FFFFFF-0.png" alt="&nbsp;" style="width: 95vw; height: 95vh;" />
+                      <div class="carousel-caption">
+                      {{yh_grap2|safe}} {{yh_3D|safe}}
+                        <h1>Slide 2</h1>
+                        <p>Bootstrap 3 still features a 12-column grid, but many of the CSS class names have completely changed.</p>
+                        <p><a class="btn btn-large btn-primary" href="#">Learn more</a>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="container-fluid w-100">
+                      <img class="d-block" src="http://1x1px.me/FFFFFF-0.png" alt="&nbsp;" style="width: 95vw; height: 95vh;" />
+                      <div class="carousel-caption">
+                        <h1>Slide 3</h1>
+                        <p>Bootstrap 3 still features a 12-column grid, but many of the CSS class names have completely changed.</p>
+                        <p><a class="btn btn-large btn-primary" href="#">Learn more</a>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+               <span class="sr-only">Previous</span>
+               </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators2" role="button" data-slide="next">
+               <span class="carousel-control-next-icon" aria-hidden="true"></span>
+               <span class="sr-only">Next</span>
+               </a>
+              </div>
+            </div>
+          </div>
+          <div id='section2' class='section' data-anchor='firstPage'>
+            <div class="col-md-12">
+              <div id="carouselExampleIndicators3" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                  <li data-target="#carouselExampleIndicators3" data-slide-to="0" class="active"></li>
+                  <li data-target="#carouselExampleIndicators3" data-slide-to="1"></li>
+                  <li data-target="#carouselExampleIndicators3" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <div class="container-fluid w-100">
+                      <img class="d-block" src="http://1x1px.me/FFFFFF-0.png" alt="&nbsp;" style="width: 95vw; height: 95vh;" />
+                      <div class="carousel-caption">
+                     	 <div id='graph2'></div>
+                        <h1>Slide 1</h1>
+                        <p>Bootstrap 3 still features a 12-column grid, but many of the CSS class names have completely changed.</p>
+                        <p><a class="btn btn-large btn-primary" href="#">Learn more</a>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="container-fluid w-100">
+                      <img class="d-block" src="http://1x1px.me/FFFFFF-0.png" alt="&nbsp;" style="width: 95vw; height: 95vh;" />
+                      <div class="carousel-caption">
+                      	<div id="maegraph"></div>
+						<div id = 'msegraph'></div>
+                        <h1>Slide 2</h1>
+                        <p>Bootstrap 3 still features a 12-column grid, but many of the CSS class names have completely changed.</p>
+                        <p><a class="btn btn-large btn-primary" href="#">Learn more</a>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="container-fluid w-100">
+                      <img class="d-block" src="http://1x1px.me/FFFFFF-0.png" alt="&nbsp;" style="width: 95vw; height: 95vh;" />
+                      <div class="carousel-caption">
+                     	<div id="lineargraph"></div>
+						<div id="graph1"></div>
+                        <h1>Slide 3</h1>
+                        <p>Bootstrap 3 still features a 12-column grid, but many of the CSS class names have completely changed.</p>
+                        <p><a class="btn btn-large btn-primary" href="#">Learn more</a>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators3" role="button" data-slide="prev">
+               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+               <span class="sr-only">Previous</span>
+               </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators3" role="button" data-slide="next">
+               <span class="carousel-control-next-icon" aria-hidden="true"></span>
+               <span class="sr-only">Next</span>
+               </a>
+              </div>
+            </div>
+          </div>
+          <div id='section2' class='section' data-anchor='firstPage'>
+            <div class="col-md-12">
+              <div id="carouselExampleIndicators4" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                  <li data-target="#carouselExampleIndicators4" data-slide-to="0" class="active"></li>
+                  <li data-target="#carouselExampleIndicators4" data-slide-to="1"></li>
+                  <li data-target="#carouselExampleIndicators4" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <div class="container-fluid w-100">
+                      <img class="d-block" src="http://1x1px.me/FFFFFF-0.png" alt="&nbsp;" style="width: 95vw; height: 95vh;" />
+                      <div class="carousel-caption">
+                     	 {{cg_graph2|safe}}
+                        <h1>Slide 1</h1>
+                        <p>Bootstrap 3 still features a 12-column grid, but many of the CSS class names have completely changed.</p>
+                        <p><a class="btn btn-large btn-primary" href="#">Learn more</a>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="container-fluid w-100">
+                      <img class="d-block" src="http://1x1px.me/FFFFFF-0.png" alt="&nbsp;" style="width: 95vw; height: 95vh;" />
+                      <div class="carousel-caption">
+                      
+                        <h1>Slide 2</h1>
+                        
+                        <p>Bootstrap 3 still features a 12-column grid, but many of the CSS class names have completely changed.</p>
+                        <p><a class="btn btn-large btn-primary" href="#">Learn more</a>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="container-fluid w-100">
+                      <img class="d-block" src="http://1x1px.me/FFFFFF-0.png" alt="&nbsp;" style="width: 95vw; height: 95vh;" />
+                      <div class="carousel-caption">
+                     	 {{cg_chart|safe}}
+                        <h1>Slide 3</h1>
+                        <p>Bootstrap 3 still features a 12-column grid, but many of the CSS class names have completely changed.</p>
+                        <p><a class="btn btn-large btn-primary" href="#">Learn more</a>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators4" role="button" data-slide="prev">
+               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+               <span class="sr-only">Previous</span>
+               </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators4" role="button" data-slide="next">
+               <span class="carousel-control-next-icon" aria-hidden="true"></span>
+               <span class="sr-only">Next</span>
+               </a>
+              </div>
+            </div>
+          </div>
+          
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!--Trianglify background-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/trianglify/0.4.0/trianglify.min.js"></script>
+    <script>
+      var pattern = Trianglify({
+        cell_size: 45,
+        variance: 0.75,
+        x_colors: ['#aaaaaa', '#999999', '#888888', '#777777', '#666666', '#555555', '#444444', '#333333', '#222222', '#111111', '#000000'],
+        y_colors: 'match_x',
+        width: window.screen.availWidth,
+        height: window.screen.availHeight
+      });
+      document.body.style['background-image'] = 'url(' + pattern.png() + ')';
+    </script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  
+
+     
+	
+    <script>
+      $(document).ready(function() {
+        $('#fullpage').fullpage({
+          navigation: true
+        });
+        
+        
+        
+      });
+    </script>
+    <script>
+      plyr.setup({
+        controls: ['play-large']
+      });
+    </script>
+
+
+
+
+   
+   <script type="text/javascript" src="../static/js/ajax.js"></script>
+    
+</body>
+</html>

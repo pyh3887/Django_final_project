@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<<<<<<< HEAD
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -32,22 +33,139 @@ $(document).ready(function(){
 		})
 })
 </script>
+=======
+
+>>>>>>> branch 'master' of https://github.com/pyh3887/Django_final_project.git
 </head>
 <body>
 dsa
+<div id = "Progress_Loading"><!-- 로딩바 -->
+데이터 분석중입니다 잠시만 기다려주세요 ...
+<img src="../static/loading.gif"/>
+</div>
 
 
-<div><a href="#" id="burger">버거</a><a href="#" id="juice">음료</a><a href="admin">관리자</a><br><br><hr>
+
+<div>
+
+<a href="#" id="burger">버거</a>
+<input type="button" id="anal2">
 <div id="showData"></div>
 <div id="showData2"></div>
+<<<<<<< HEAD
+=======
+<div id="showData3"></div>
+<div id="showData4"></div>
+
+<div id = "Progress_Loading2"><!-- 로딩바 -->
+데이터 분석중입니다 잠시만 기다려주세요 ...
+<img src="../static/loading.gif"/>
+</div>
+
+>>>>>>> branch 'master' of https://github.com/pyh3887/Django_final_project.git
 
 {{a}}
 
 {{yh_grap1|safe}}
 {{yh_grap2|safe}}
 {{yh_grap3|safe}}
-{{plot_div|safe}}
+{{plot_div01|safe}}
+{{plot_div02|safe}}
+{{plot_div1|safe}}
 {{plot_div2|safe}}
+{{plot_div3|safe}}
 </div>
 </body>
+<script type="text/javascript">
+
+$(document).ready(function(){
+	$('#Progress_Loading').hide(); //첫 시작시 로딩바를 숨겨준다.
+	$('#Progress_Loading2').hide();
+	
+	$.ajax({
+		url:'show3',
+		type:'get',
+		dataType:'json',
+		async:true,
+		success:function(data){
+			//alert(data)
+			
+			maegraph = data['ks_graph_mae']
+			msegraph = data['ks_graph_mse']
+			lineargraph = data['ks_graph_linear']
+			graph1 = ['ks_graph1']
+			graph2 = ['ks_graph2']
+			loss = data['loss']
+			mae = data['mae']
+			mse = data['mse']
+			acc = data['acc']
+			
+			$('#maegraph').append(maegraph)	
+			$('#maegraph').append(msegraph)	
+			$('#lineargraph').append(lineargraph)	
+			$('#graph1').append(graph1)	
+			$('#graph2').append(graph2)	
+			$('#loss').append(loss)	
+			$('#mae').append(mae)	
+			$('#mse').append(mse)	
+			$('#acc').append(acc)	
+				
+		},
+		error:function(){
+			$('#showData').text('error')
+		}
+	})
+	//alert("a")
+	//버거를 눌렀을 시
+	$("#burger").bind('click',function(){
+		$('#Progress_Loading').show(); //ajax실행시 로딩바를 보여준다.
+		$("#showData").empty()
+		//alert('b')
+			$.ajax({
+				url:'show',
+				type:'get',
+				dataType:'json',
+				async:true,
+				success:function(data){
+					//alert(data)
+					alert(data['a'])
+					str1 = "<h1>"+ data['a'] + "</h1>"
+					str1 += "<h1>정확도 :"+ data['accuracy'] + "%</h1>"
+					str2 = "<div>" + data['yh_grap3']+ "</div>" 					
+					$('#showData').append(str1)	
+					$('#showData2').append(str2)	
+					$('#Progress_Loading').hide(); //ajax종료시 로딩바를 숨겨준다.		
+				},
+				error:function(){
+					$('#showData').text('error')
+				}
+			})
+		})
+		
+	$("#anal2").bind('click',function(){
+		$('#Progress_Loading2').show(); //ajax실행시 로딩바를 보여준다.
+		$("#showData").empty()
+		//alert('b')
+			$.ajax({
+				url:'show2', 
+				type:'get',
+				dataType:'json',
+				async:true,
+				success:function(data){
+					//alert(data)
+					alert(data['anal'])
+					str1 = "<h1>"+ data['anal'] + "</h1>"					
+					$('#showData4').append(str1)
+					$('#Progress_Loading2').hide(); //ajax종료시 로딩바를 숨겨준다.					
+				
+				},
+				error:function(){
+					$('#showData').text('error')
+				}
+			})
+		})
+
+})
+
+</script>
 </html>

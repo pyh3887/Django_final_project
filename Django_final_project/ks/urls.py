@@ -17,6 +17,6 @@ from django.urls import path
 from ks import views
 
 urlpatterns = [
-    path('',views.mainFunc),
+    path('', views.mainFunc),
     
 ]
