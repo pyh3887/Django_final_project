@@ -4,6 +4,30 @@ $(document).ready(function(){
 	$('#Progress_Loading').hide(); //첫 시작시 로딩바를 숨겨준다.
 	$('#Progress_Loading2').hide();
 	
+	$("#btnSubmit").bind('click',function(){
+	      
+	      // alert("버튼 넘어옴")
+	      var raisehandcount = $("#raisehandcount").val()
+	      var checkcount = $("#checkcount").val()
+	      var discount = $("#discount").val()
+	     alert(raisehandcount + checkcount + discount)
+	      $("#predictShow").empty()
+	      $.ajax({
+	         url:'predictgo',
+	         type:'get',
+	         data:{'raisehandcount':raisehandcount,'checkcount':checkcount,'discount':discount},
+	         dataType:'json',
+	         success:function(data){
+	            alert('result' + data['resultPredict'])
+	            data['figs']
+	            
+	            $("#predictShow").html(data['fig1']).css("color", "red");
+	         },
+	         error:function(){
+	            alert('실패')
+	         }
+	      })   
+	   })
 	$.ajax({
 	      url:'show3',
 	      type:'get',
@@ -132,5 +156,7 @@ $(document).ready(function(){
 				}
 			})
 		})
+		
+		
 
 })

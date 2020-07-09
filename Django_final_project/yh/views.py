@@ -208,7 +208,88 @@ def mainFunc(request):
     fig9.update_layout(height=300)
     plot11_div = plot(fig9,output_type='div') 
     
+        
     
+    # 3---1-1-1-1-1-1-1-1-1-1-1-1-1-1-1=-1--1-1-1-1-1-1--
+
+    df1 = pd.DataFrame({"결석일수":data['결석일수'],"새공지사항확인수":data['새공지사항확인수']})
+    print(df1)
+    df8 = pd.crosstab(df1.결석일수, df1.새공지사항확인수, margins=True)
+    print(df8)
+    df8 = df8.drop(['All'])
+    fig50 = go.Figure(data=[
+        go.Bar(name='Under-7', x=['Egypt', 'Iran', 'Iraq', 'Jordan', 'KW', 'Lybia', 'Morocco',
+       'Palestine', 'SaudiArabia', 'Syria', 'Tunis', 'USA', 'lebanon',
+       'venzuela'],y=df8.iloc[0,:17].values),    
+        go.Bar(name='Above-7', x=['Egypt', 'Iran', 'Iraq', 'Jordan', 'KW', 'Lybia', 'Morocco',
+       'Palestine', 'SaudiArabia', 'Syria', 'Tunis', 'USA', 'lebanon',
+       'venzuela'],y=df8.iloc[1,:17].values),
+        ])
+        # Change the bar mode
+    fig50.update_layout(xaxis_title='국적',yaxis_title='새공지사항확인수')
+    fig50.update_layout(width=700)
+    fig50.update_layout(height=250)
+    cg_graph7 = plot(fig50,output_type='div') 
+    
+    df1 = pd.DataFrame({"결석일수":data['결석일수'],"토론참여수":data['토론참여수']})
+    print(df1)
+    df8 = pd.crosstab(df1.결석일수, df1.토론참여수, margins=True)
+    print(df8)
+    df8 = df8.drop(['All'])
+    fig51 = go.Figure(data=[
+        go.Bar(name='Under-7', x=['Egypt', 'Iran', 'Iraq', 'Jordan', 'KW', 'Lybia', 'Morocco',
+       'Palestine', 'SaudiArabia', 'Syria', 'Tunis', 'USA', 'lebanon',
+       'venzuela'],y=df8.iloc[0,:17].values),    
+        go.Bar(name='Above-7', x=['Egypt', 'Iran', 'Iraq', 'Jordan', 'KW', 'Lybia', 'Morocco',
+       'Palestine', 'SaudiArabia', 'Syria', 'Tunis', 'USA', 'lebanon',
+       'venzuela'],y=df8.iloc[1,:17].values),
+        ])
+        # Change the bar mode
+    fig51.update_layout(xaxis_title='국적',yaxis_title='토론참여수')
+    fig51.update_layout(width=700)
+    fig51.update_layout(height=250)
+    cg_graph71 = plot(fig51,output_type='div') 
+    
+    df1 = pd.DataFrame({"결석일수":data['결석일수'],"발표수":data['발표수']})
+    print(df1)
+    df8 = pd.crosstab(df1.결석일수, df1.발표수, margins=True)
+    print(df8)
+    df8 = df8.drop(['All'])
+    fig52 = go.Figure(data=[
+        go.Bar(name='Under-7', x=['Egypt', 'Iran', 'Iraq', 'Jordan', 'KW', 'Lybia', 'Morocco',
+       'Palestine', 'SaudiArabia', 'Syria', 'Tunis', 'USA', 'lebanon',
+       'venzuela'],y=df8.iloc[0,:17].values),    
+        go.Bar(name='Above-7', x=['Egypt', 'Iran', 'Iraq', 'Jordan', 'KW', 'Lybia', 'Morocco',
+       'Palestine', 'SaudiArabia', 'Syria', 'Tunis', 'USA', 'lebanon',
+       'venzuela'],y=df8.iloc[1,:17].values),
+        ])
+        # Change the bar mode
+    fig52.update_layout(xaxis_title='국적',yaxis_title='발표수')
+    fig52.update_layout(width=700)
+    fig52.update_layout(height=250)
+    cg_graph72 = plot(fig52,output_type='div') 
+    
+    # 33333 3 3  3 3 - - - - - - -2-2-2- 2- 2- 22 2 2  2 222  3D model
+    data = pd.read_csv('https://raw.githubusercontent.com/pyh3887/Django_final_project/master/student.csv', encoding='euc-kr')
+    data['결석일수'] = data['결석일수'].map({'Under-7':0,'Above-7':1})
+    data['성별'] = data['성별'].map({'M':0,'F':1})
+    data['성적'] = data['성적'].map({'L':0, 'M':1, 'H':2})
+
+
+
+    fig54 = px.scatter_3d(data[:480], x='발표수', y='토론참여수', z='새공지사항확인수',
+              color='결석일수',  size_max=5, symbol='성별'
+               )
+    
+
+    # tight layout
+    fig54.update_layout(margin=dict(l=0, r=0, b=0, t=0))
+    fig54.update_traces(opacity=1, marker=dict(showscale=True, reversescale=True, cmid=6))
+    fig54.update_layout(width=800)
+    fig54.update_layout(height=700)
+    fig54.update_layout(plot_bgcolor='rgba(255,255,255,0.5)')   
+
+    cg_graph74 = plot(fig54,output_type='div')
     
     # 랜덤포레스트 사용
     # 모델 평가 생성
@@ -472,7 +553,7 @@ def mainFunc(request):
     # 랜덤포레스트 사용
 
         
-    return render(request,'full.html',{'yh_grap1':yh_grap1,'yh_grap2':yh_grap2,'yh_3D':yh_3D,
+    return render(request,'full.html',{'yh_grap1':yh_grap1,'yh_grap2':yh_grap2,'yh_3D':yh_3D,'cg_graph74':cg_graph74,'cg_graph72':cg_graph72,'cg_graph71':cg_graph71,'cg_graph7':cg_graph7,
     'yj_grap1': plot_div,'yj_pie': pie_div,'yj_grap2': last_div,'yj_grap3': ab_plot,'yj_scatter': plot5_div,'cg_graph1': plot10_div,'cg_graph2': plot11_div,'cg_graph3':cg_graph,'cg_chart':cg_chart,'heatmap': plot20_div})
 
 
@@ -837,3 +918,113 @@ def tensorFunc(request):
         
     #print(datas)
     return HttpResponse(json.dumps(datas),content_type='application/json')
+
+# ================================== 찬규 모델 값 입력 받아서 결과 예측하기 시작 ======================================
+def PredictGo(request):
+    
+    # 웹으로부터 발표수, 새공지사항확인수, 토론참여횟수 입렵 받기
+    raisehandcount = request.GET.get('raisehandcount')
+    checkcount = request.GET.get('checkcount')
+    discount = request.GET.get('discount')
+        
+    print(raisehandcount, checkcount, discount)
+    
+    # 데이터 추출
+    from sklearn.metrics._classification import accuracy_score
+    from sklearn.ensemble import RandomForestRegressor
+    from xgboost import XGBRegressor
+    
+    data = pd.read_csv('https://raw.githubusercontent.com/pyh3887/Django_final_project/master/student.csv', encoding='euc-kr')
+    
+    df2 = pd.DataFrame({"결석일수":data['결석일수'],"발표수":data['발표수'],"새공지사항확인수":data['새공지사항확인수'],"토론참여수":data['토론참여수']})
+    df2['결석일수'] = data['결석일수'].map({'Under-7':0,'Above-7':1})
+    
+    
+    x = df2[['발표수','토론참여수','새공지사항확인수']].values # 2차원
+    y = df2[['결석일수']].values # 1차원
+    
+    # 1번 랜덤포레스트  평가 모델 생성 - > 정확도 분석
+    randomforestmodel = RandomForestRegressor(n_estimators=1000, criterion='mse').fit(x,y)
+    # modelflatten = model.predict(x)[:10]
+    # print('예측값 ', np.where(modelflatten.flatten() > 0.5 , 1, 0))
+    # print('실제값 : ', y[:10].ravel())
+    a = randomforestmodel.predict(x)
+    xh = np.where(a.flatten() > 0.5,1,0)
+    
+    # 랜덤포레스트 모델에서 학습한 경우의 정확도
+    print('RandomForestRegressor : ' , accuracy_score(y,xh))
+    
+    
+    # 2번 xgboost 평가 모델 생성 - > 정확도 분석 
+    xgboostmodel = XGBRegressor(n_estimators=100).fit(x,y)
+    # model3flatten = xgboostmodel.predict(x)[:10]
+    # print('예측값 ', np.where(model3flatten.flatten() > 0.5 , 1, 0))
+    # print('실제값 : ', y[:10].ravel())
+    a = xgboostmodel.predict(x)
+    xh = np.where(a.flatten() > 0.5,1,0)
+    
+    # xgboost 모델에서 학습한 경우의 정확도
+    print('XGboost : ' , accuracy_score(y,xh))
+    
+    
+    # =============정상적으로 출력 가능해지면 삭제 가능================
+    # 새로운 데이터 값 삽입
+    new_x = [[100,100,100]]
+    print(new_x)
+    modelpredict = randomforestmodel.predict(new_x)
+    print('RandomForestRegressor 새로운 값으로 예측 : ' ,np.where(modelpredict.flatten() > 0.5, 1, 0))
+    print('===========================================================')
+    
+    # XGboost 96%의 확률
+    model3predict = xgboostmodel.predict(np.array(new_x))
+    print('XGboost에서 새로운 값으로 예측 : ' ,np.where(model3predict.flatten() > 0.5, 1, 0))
+    print('===========================================================')
+
+    # =====================================================
+    
+    # 웹으로 새로운 값 입력 받아 결과 값 예측
+    # 웹으로부터 새로운 값 3개 입력 받음
+    new_x = [[raisehandcount, checkcount, discount]]
+    print(new_x)
+    
+    # 웹으로 받은 3개 값으로부터 예측값 출력
+    # 랜덤 포레스트의 경우
+    modelpredict = randomforestmodel.predict(new_x)
+    print('랜덤 포레스트의 경우 새로운 값으로 예측(반올림X) : ',modelpredict)
+    print('랜덤 포레스트의 경우 새로운 값으로 예측(반올림) : ' ,np.where(modelpredict.flatten() > 0.5, 1, 0))
+    # XGboost의 경우
+    model3predict = xgboostmodel.predict(np.array(new_x))
+    print('XGboost에서 새로운 값으로 예측 (반올림X): : ',model3predict)
+    print('XGboost에서 새로운 값으로 예측 (반올림_: ' ,np.where(model3predict.flatten() > 0.5, 1, 0))
+    
+# = = = = == = = = = = = = 모델별 시각화 
+    import plotly.figure_factory as ff
+    
+    outmodelpredict = np.where(modelpredict.flatten() > 0.5, 1, 0)
+    if outmodelpredict == 0:
+        outmodel2predict = '예측 값이 0 이므로 결석일이 7일 이하로 예측 됩니다.'
+    else:
+        outmodel2predict = '예측 값이 1 이므로 결석일이 7일 이상으로 예측 됩니다.'
+    
+    outmodel3predict = np.where(model3predict.flatten() > 0.5, 1, 0)
+    if outmodel3predict == 0:
+        outmodel3predict = '예측 값이 0 이므로 결석일이 7일 이하로 예측 됩니다.'
+    else:
+        outmodel3predict = '예측 값이 1 이므로 결석일이 7일 이상으로 예측 됩니다.'
+    
+
+    text1 = [['모델명', '예측값', '해석'], ['RandomForestRegressor',np.where(modelpredict.flatten() > 0.5, 1, 0),outmodel2predict],
+                                        ['XGboost',np.where(model3predict.flatten() > 0.5, 1, 0),outmodel3predict]]
+ 
+    colorscale1 = [[0, '#272D31'],[.5, '#ffffff'],[1, '#ffffff']]
+    font1=['#FCFCFC', 'blue','blue']
+
+    fig1 = ff.create_table(text1, colorscale=colorscale1, font_colors=font1, index_title="정확도가 가장 높은 모델에서의 예측 및 해석")
+    fig1.layout.width=1350
+    fig1 = plot(fig1,output_type='div')
+        
+    datas = {'fig1':fig1}
+
+    return HttpResponse(json.dumps(datas),content_type='application/json')
+
+# ============================= 찬규 모델 값 입력 받아서 결과 예측하기  끝=================================

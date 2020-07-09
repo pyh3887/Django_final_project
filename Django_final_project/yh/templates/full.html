@@ -383,52 +383,98 @@
             </div>
           </div>
           <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ks END~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-          <div id='section5' class='section' data-anchor='page5'>
+          <div id='section5' class='section' data-anchor='page5' style="background-image: url('../static/images/cgbook1.png')">
             <div class="col-md-12">
               <div id="carouselExampleIndicators4" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
-                  <li data-target="#carouselExampleIndicators4" data-slide-to="0"></li>
+                  <li data-target="#carouselExampleIndicators4" data-slide-to="0" class="active"></li>
                   <li data-target="#carouselExampleIndicators4" data-slide-to="1"></li>
                   <li data-target="#carouselExampleIndicators4" data-slide-to="2"></li>
-                  <li data-target="#carouselExampleIndicators4" data-slide-to="3" class="active"></li>
+                  <li data-target="#carouselExampleIndicators4" data-slide-to="3"></li>
+                  <li data-target="#carouselExampleIndicators4" data-slide-to="4"></li>
                   
                 </ol>
-                <div class="carousel-inner">
+                       <div class="carousel-inner">
+                
                   <div class="carousel-item active">
                     <div class="container-fluid w-100">
-                      <img class="d-block" src="http://1x1px.me/FFFFFF-0.png" alt="&nbsp;" style="width: 95vw; height: 95vh;" />
-                      <div class="carousel-caption">
-                       {{cg_graph2|safe}}
-                        <h1>Slide 1</h1>
-                        <p>Bootstrap 3 still features a 12-column grid, but many of the CSS class names have completely changed.</p>
-                        <p><a class="btn btn-large btn-primary" href="#">Learn more</a>
-                        </p>
+                      <img class="d-block" src="http://1x1px.me/FFFFFF-0.png" alt="&nbsp;" style="width: 95vw; height: 85vh; style="rgba(0, 0, 0, 0.6);" />
+                      <div class="carousel-caption"style="margin-left:0%">
+                       <div class="row">
+                       <div class="col-sm-7">
+                       {{cg_graph7|safe}}<br></div>
+                       <div class="col-sm-5" style = "background-color: rgba(255,255,255,0.7); top: 50px; margin:auto; position: inherit;"><br>
+                  <h4 style="font-size:20px; font-weight: bold; color: midnightblue;"><br>새 공지사항 확인 횟수로 결석인원 분석</h4><br><br>                       
+                       </div><br>
+                       <div class="col-sm-7">
+                       {{cg_graph71|safe}}<br></div>
+                       <div class="col-sm-5" style = "background-color: rgba(255,255,255,0.7); top: 50px; margin:auto; position: inherit;"><br>
+                  <h4 style="font-size:20px; font-weight: bold; color: midnightblue;"><br>토론 참여 횟수로 결석인원 분석</h4><br><br>                       
+                       </div><br>
+                        <div class="col-sm-7">
+                       {{cg_graph72|safe}}<br></div>
+                       <div class="col-sm-5" style = "background-color: rgba(255,255,255,0.7); top: 50px; margin:auto; position: inherit;">
+                  <h4 style="font-size:20px; font-weight: bold; color: midnightblue;"><br><br>발표 횟수로 결석인원 분석 </h4><br><br>                       
+                       </div>
+                       </div>
+
                       </div>
                     </div>
                   </div>
                   <div class="carousel-item">
                     <div class="container-fluid w-100">
-                      <img class="d-block" src="http://1x1px.me/FFFFFF-0.png" alt="&nbsp;" style="width: 95vw; height: 95vh;" />
-                      <div class="carousel-caption">
+                      <img class="d-block" src="http://1x1px.me/FFFFFF-0.png" alt="&nbsp;" style="width: 95vw; height: 75vh;" />
+                      <div class="carousel-caption"style="margin-left:0%">
+                       <!--  {{cg_graph73|safe}}  -->
+                       <!-- {{cg_graph2|safe}} -->
+                       <div class="row">
+                       <div class="col-sm-7">
+                       {{cg_graph74|safe}}
+                       </div><div class="col-sm-5" style = "background-color: rgba(255,255,255,0.7);"><br><br><br><br><br>
+                  <h2 style="color: black;">3D 모델로 시각화</h2><br><br>
+                  <h4 style="font-size:20px; font-weight: bold; color: midnightblue;">앞서 사용한 데이터들을 전부 사용하여 3D 모델로 출력 </h4><br><br>
+                  <h4 style="font-size:20px; font-weight: bold; color: midnightblue;">해석1. 결석 횟수가 많은 학생들은 상대적으로 학교생활에 적극적이지 않다.</h4><br>
+                  <h4 style="font-size:20px; font-weight: bold; color: midnightblue;">해석2. 여학생들은 상대적으로 7일 이상 결석하지 않음</h4><br>
+                  <h4 style="font-size:20px; font-weight: bold; color: midnightblue;">해석3. 반면, 남학생들은 상대적으로 7일 이상 결석하는 인원이 더 많음.</h4><br>
+                  <h4 style="font-size:20px; font-weight: bold; color: midnightblue;">수업에 참여도가 높을수록 상대적으로 결석일수가 7일 이하인 것을 확인 할 수 있다. </h4><br>
+                  
+                  
+                       </div>
+                  
+               </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="container-fluid w-100">
+                                                 
+                      <div class="d-block"  style="width: 95vw; height: 75vh;">
+                      <div class="carousel-caption" style="height:70vh">
+                      <h1>SKlearn의 주요 모델에 학습시켜 임의의 값으로 결과 출력</h1><br>
                       {{cg_chart|safe}}
-                        <h1>Slide 2</h1>                        
-                        <p>Bootstrap 3 still features a 12-column grid, but many of the CSS class names have completely changed.</p>
-                        <p><a class="btn btn-large btn-primary" href="#">Learn more</a>
-                        </p>
+                      <br><br>
+					                      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+					  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+					    <span class="navbar-toggler-icon"></span>
+					  </button>
+					
+					  <div class="collapse navbar-collapse" id="navbarColor03" style="margin-left:25%">
+					    <form class="form-inline my-2 my-lg-0">
+					    <input class="form-control mr-sm-2" type="text" placeholder="새 공지사항 확인 수" id="checkcount">
+					    <input class="form-control mr-sm-2" type="text" placeholder="발표 수" id="raisehandcount">
+					      <input class="form-control mr-sm-2" type="text" placeholder="토론 참여 수" id="discount">
+					      <button class="btn btn-secondary my-2 my-sm-0" type="submit" id="btnSubmit">예측하기</button>
+					    </form>
+					    <br><br>
+					  </div>
+					</nav><br><br>
+					                   <h1>결 과 출 력</h1><br>
+					    <div id="predictShow"></div>
+					                      </div>
                       </div>
                     </div>
                   </div>
-                  <div class="carousel-item">
-                    <div class="container-fluid w-100">
-                      <img class="d-block" src="http://1x1px.me/FFFFFF-0.png" alt="&nbsp;" style="width: 95vw; height: 95vh;" />
-                      <div class="carousel-caption">
-                        <h1>Slide 3</h1>
-                        <p>Bootstrap 3 still features a 12-column grid, but many of the CSS class names have completely changed.</p>
-                        <p><a class="btn btn-large btn-primary" href="#">Learn more</a>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+                  
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators4" role="button" data-slide="prev">
                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -475,6 +521,7 @@
               navigationTooltips:['Main','Visual','Analysis1','Analysis2','Analysis3'],
               
             }); 
+ 		
         
         
       });
@@ -518,6 +565,9 @@
           // add class to the one we clicked
           
          // $("a#comment-reply").fadeOut();
+           
+         
+
        });
     });
     	
