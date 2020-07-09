@@ -35,6 +35,7 @@ plt.rc('font',family='malgun gothic')
 # Create your views here.
 def mainFunc(request):
     
+    #윤진씨
     studentData = pd.read_csv('https://raw.githubusercontent.com/pyh3887/Django_final_project/master/student.csv',encoding='cp949')
 #     print(studentData.head(3))
 #     studentData.성적.value_counts()
@@ -49,15 +50,15 @@ def mainFunc(request):
     go.Bar(name='Good', x=['H','L','M'],y=studentData[studentData['부모의학교만족도']=='Good'].groupby(['성적','부모의학교만족도']).size(),
             marker_color='#9bb1d6'),
     go.Bar(name='Bad', x=['H','L','M'],y=studentData[studentData['부모의학교만족도']=='Bad'].groupby(['성적','부모의학교만족도']).size(),
-           marker_color='#a39bd6'),
+           marker_color='#a39bd6'), 
      
     ])
     # Change the bar mode
-    fig = fig.update_layout(barmode ='group',width=500,
-    height=500,
-    title='부모의학교만족도에 따른 성적 그래프',
+    fig = fig.update_layout(barmode ='group',width=600,
+    height=600,
+    
     xaxis_title='성적',
-    yaxis_title='합계',plot_bgcolor='rgba(0,0,0,0)',paper_bgcolor='rgba(0,0,0,0)',font=dict(family='Courier New, monospace')
+    yaxis_title='합계',plot_bgcolor='rgba(0,0,0,0)',paper_bgcolor='rgba(255,255,255,0)',font=dict(family='Courier New, monospace',color='#fff',size=18)
     )  #데이터를 그룹화하여 표에 적용
 
 #     fig = px.bar(studentData, x='성적', y='부모의학교만족도', barmode='group',height=400)
@@ -68,7 +69,7 @@ def mainFunc(request):
     fig2 = go.Figure(data=[go.Pie(labels=['Arabic','Biology','Chemistry','English','French','Geology','History','IT','Math','Quran','Science','Spanish'], values=studentData.groupby(['전공']).size(), textinfo='label+percent',
                              insidetextorientation='radial'
                             )])   
-    fig2 = fig2.update_layout(width=500,height=600)                          
+    fig2 = fig2.update_layout(width=550,height=500,paper_bgcolor='rgba(255,255,255,0)',plot_bgcolor='rgba(0,0,0,0)',font=dict(family='Courier New, monospace', color='#fff',size=18),showlegend = False)                          
     pie_div = plot(fig2,output_type='div') 
 #     print('룰루랄ㄹ라\n',studentData.groupby(['전공']).size())
     #전공별 성적 비교----의미가 있는지 없는지 확인받기
@@ -99,9 +100,9 @@ def mainFunc(request):
         name="Low",
         ))
 
-    fig3.update_layout(title="전공에 따른 성적 그래프",
+    fig3.update_layout(
                   xaxis_title="학생수",
-                  yaxis_title="전공",width=700,height=500)
+                  yaxis_title="전공",width=700,height=500,paper_bgcolor='rgba(255,255,255,0)',plot_bgcolor='rgba(0,0,0,0)',font=dict(family='Courier New, monospace', color='#fff',size=18))
     
     last_div = plot(fig3,output_type='div')
     
@@ -119,19 +120,19 @@ def mainFunc(request):
         )
         ])
     print(studentData[studentData['결석일수']=='Above-7'].groupby(['성적']).size())
-    fig4.update_layout(title="결석일수에 따른 성적 분포",
+    fig4.update_layout(
                   xaxis_title="성적",
-                  yaxis_title="학생수",width=500,height=500,paper_bgcolor='rgba(0,0,0,0)',plot_bgcolor='rgba(0,0,0,0)',font=dict(family='Courier New, monospace', color='#000'))
+                  yaxis_title="학생수",width=600,height=600,paper_bgcolor='rgba(255,255,255,0)',plot_bgcolor='rgba(0,0,0,0)',font=dict(family='Courier New, monospace', color='#fff',size=18))
     
     ab_plot = plot(fig4,output_type='div')
                 
     fig5 = px.scatter_matrix(studentData,dimensions=["발표수", "과정반복수", "새공지사항확인수", "토론참여수"],color="성적",width=1200, height=1000)
+    fig5.update_layout(width=800,height=800,paper_bgcolor='rgba(255,255,255,0)',plot_bgcolor='rgba(0,0,0,0)',font=dict(family='Courier New, monospace', color='#fff',size=18))
+    
     
     plot5_div = plot(fig5,output_type='div')
     
-    fig6 = px.strip(studentData, x="발표수", y="발표수", orientation="v", color="성적")
-
-    plot6_div = plot(fig6,output_type='div')
+  
 
 
     
@@ -159,16 +160,22 @@ def mainFunc(request):
     fig8 = go.Figure(data=[
         go.Bar(name='H', x=['Egypt', 'Iran', 'Iraq', 'Jordan', 'KW', 'Lybia', 'Morocco',
        'Palestine', 'SaudiArabia', 'Syria', 'Tunis', 'USA', 'lebanon',
-       'venzuela'],y=df7.iloc[0,:17].values),    
+       'venzuela'],y=df7.iloc[0,:17].values,
+        marker_color='rgb(152,105,247)'
+        ),    
         go.Bar(name='M', x=['Egypt', 'Iran', 'Iraq', 'Jordan', 'KW', 'Lybia', 'Morocco',
        'Palestine', 'SaudiArabia', 'Syria', 'Tunis', 'USA', 'lebanon',
-       'venzuela'],y=df7.iloc[1,:17].values),
+       'venzuela'],y=df7.iloc[1,:17].values,
+        marker_color='rgb(247,152,105)'
+        ),
         go.Bar(name='L', x=['Egypt', 'Iran', 'Iraq', 'Jordan', 'KW', 'Lybia', 'Morocco',
        'Palestine', 'SaudiArabia', 'Syria', 'Tunis', 'USA', 'lebanon',
-       'venzuela'],y=df7.iloc[2,:17].values),
+       'venzuela'],y=df7.iloc[2,:17].values,
+        marker_color='rgb(105,247,152)'
+        ),
         ])
     # Change the bar mode
-    fig8.update_layout(barmode ='stack')
+    fig8.update_layout(barmode ='stack',width=900,paper_bgcolor='rgba(255,255,255,0)',plot_bgcolor='rgba(0,0,0,0)',font=dict(family='Courier New, monospace', color='#fff',size=18))
     plot10_div = plot(fig8,output_type='div') 
     
     
@@ -182,23 +189,27 @@ def mainFunc(request):
     fig50 = go.Figure(data=[
         go.Bar(name='M', x=['Egypt', 'Iran', 'Iraq', 'Jordan', 'KW', 'Lybia', 'Morocco',
        'Palestine', 'SaudiArabia', 'Syria', 'Tunis', 'USA', 'lebanon',
-       'venzuela'],y=df8.iloc[0,:17].values),    
+       'venzuela'],y=df8.iloc[0,:17].values,
+        marker_color='rgb(247,105,200)'                    
+        ),    
         go.Bar(name='F', x=['Egypt', 'Iran', 'Iraq', 'Jordan', 'KW', 'Lybia', 'Morocco',
        'Palestine', 'SaudiArabia', 'Syria', 'Tunis', 'USA', 'lebanon',
-       'venzuela'],y=df8.iloc[1,:17].values),
+       'venzuela'],y=df8.iloc[1,:17].values,marker_color='rgb(105,200,247)'),
+        
         ])
         # Change the bar mode
-    fig50.update_layout(barmode ='stack')
+    fig50.update_layout(barmode ='stack',width=900 ,paper_bgcolor='rgba(255,255,255,0)',plot_bgcolor='rgba(0,0,0,0)',font=dict(family='Courier New, monospace', color='#fff',size=18))
     cg_graph = plot(fig50,output_type='div') 
    
    
     
     fig9 = px.violin(data, y="과정반복수", x="결석일수", color="성별", box=True, points="all", hover_data=df.columns)
-    fig9.update_layout(width=1000)
+    fig9.update_layout(width=1300)
+    fig9.update_layout(height=300)
     plot11_div = plot(fig9,output_type='div') 
     
     
-
+    
     # 랜덤포레스트 사용
     # 모델 평가 생성
     data = pd.read_csv('https://raw.githubusercontent.com/pyh3887/Django_final_project/master/student.csv', encoding='euc-kr')
@@ -276,10 +287,10 @@ def mainFunc(request):
                                             ['XGboost',np.where(model3flatten.flatten() > 0.5 , 1, 0), y[:10].ravel(), resultXGboost]]
     
     colorscale = [[0, '#272D31'],[.5, '#ffffff'],[1, '#ffffff']]
-    font=['#FCFCFC', '#00EE00', '#008B00', '#004F00', '#660000']
+    font=['#FCFCFC', 'red', 'black', 'black', 'red']
     
     fig51 = ff.create_table(text, colorscale=colorscale, font_colors=font)
-    fig.layout.width=800
+    fig51.layout.width=1300
     cg_chart = plot(fig51,output_type='div') 
     
     
@@ -334,9 +345,8 @@ def mainFunc(request):
                     y=['성별', '국적', '출생지', '교육단계', '학년', '학급', '전공', '학기', '담당부모', '발표수', '과정반복수', '새공지사항확인수', '토론참여수', '부모의학교만족도', '결석일수', '성적'],
                     width=1000, height=900, color_continuous_scale='RdBu_r'
                )
+    fig20.update_layout(width=800,height=800,paper_bgcolor='rgba(255,255,255,0)',plot_bgcolor='rgba(0,0,0,0)',font=dict(family='Courier New, monospace', color='#fff',size=18))
     plot20_div = plot(fig20,output_type='div')
-
-
 #     print(studentData[studentData['성적']=='M'].groupby(['전공']).size())
     
 
@@ -383,15 +393,19 @@ def mainFunc(request):
     #print('특성 중요도 :\n{}'.format(model.feature_importances_))
     print(model)
     
+    
+   
+    
     yh_fig1 = go.Figure(go.Bar(
         x=values,
         y=keys,
         marker=dict(
-            color='rgba(185, 211, 238, 0.6)',         
+            color= '#F88137'
             
         ),      
         name='성적과 관련된 중요도 그래프',
-        orientation='h',
+        orientation='h',        
+        
         
     ))
     
@@ -399,10 +413,10 @@ def mainFunc(request):
               
         legend=dict(x=0.029, y=1.038, font_size=10),
         margin=dict(l=100, r=20, t=70, b=70),
-        paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)',
-        font=dict(family='Courier New, monospace', color='#000',),
-        height = 700
+        paper_bgcolor='rgba(255,255,255,0.2)',
+        plot_bgcolor='rgba(255,255,255,0.2)',
+        font=dict(color='#000',size=30),
+        height = 600
     )
     
 
@@ -420,17 +434,23 @@ def mainFunc(request):
     yh_fig2 = px.scatter(data, x="발표수", y="토론참여수", color="성적",
                      size='과정반복수', hover_data=['토론참여수']
                     )
-    yh_fig2.update_layout(title='발표수,토론참여수에 따른 과정반복수')
+    yh_fig2.update_layout(
+                          paper_bgcolor='rgba(255,255,255,0.2)',
+                          plot_bgcolor='rgba(255,255,255,0.2)',
+                          font=dict(color='#000',size=30),
+                          height = 550,
+                          width = 1400,
+                          )
     yh_grap2 = plot(yh_fig2,output_type='div')
 
     
     data = pd.read_csv('https://raw.githubusercontent.com/pyh3887/Django_final_project/master/student.csv',encoding='euc-kr')
     data['성적'] = data['성적'].map({'H':2,'M':1,'L':0})
     fig = px.scatter_3d(data, x='발표수', y='토론참여수', z='과정반복수',
-              color='성적', size_max=1,
-              symbol='성적', opacity=0.7)
+              color='성적',
+              opacity=0.7)
     # tight layout
-    fig.update_layout(margin=dict(l=0, r=0, b=0, t=0),width=500,height=500)
+    fig.update_layout(margin=dict(l=0, r=0, b=0, t=0),width=600,height=700)
     yh_3D = plot(fig,output_type='div')
     
 
@@ -464,8 +484,6 @@ def mainFunc(request):
 
 
 
-
-
 def ksajax(request):
     data = pd.read_csv('https://raw.githubusercontent.com/pyh3887/Django_final_project/master/education.csv', encoding='euc-kr')
 # '성별', '국적', '출생지', '교육단계', '학년', '학급', '전공', '학기', '담당부모', '발표수', '과정반복수', '새공지사항확인수', '토론참여수', '부모의학교만족도', '결석일수', '성적'
@@ -480,7 +498,7 @@ def ksajax(request):
     df.loc[df['성적'] == 2, '성적'] = 2
     df.loc[df['성적'] == 1, '성적'] = 1
     #print(df['성적'].head())
-#     print(df)
+    #print(df)
     #print(df['발표수'].head(20))
     #print(np.corrcoef(df['발표수'], df['국적']))
     #print(df.corr())
@@ -548,7 +566,7 @@ def ksajax(request):
     early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=5)
     
 #     history = model.fit(st_train_data,train_labels, epochs=epochs, validation_split=0.2, verbose=1, callbacks=[early_stop])
-    history = model.fit(st_train_data,train_labels, epochs=epochs, validation_split=0.2, verbose=1,callbacks=[early_stop]) 
+    history = model.fit(st_train_data,train_labels, epochs=epochs, validation_split=0.2, verbose=1) 
     # 원래 데이터셋이 1000개 이고, fit 함수의 validation_split = 0.2 로 하면, 
     # training dataset 은 800개로 하여, training 시키고,나머지 200개는 test dataset 으로 사용하여, 모델을 평가하게 된다.
     df = pd.DataFrame(history.history)
@@ -569,7 +587,9 @@ def ksajax(request):
     fig.update_layout(title='MAE 오차',
                xaxis_title='Epoch',
                yaxis_title='Mean Abs Error [발표수]',
-               width=600, height=600)
+               width=700, height=700,
+               paper_bgcolor='rgba(255,255,255,0.5)',plot_bgcolor='rgba(255,255,255,0.5)',
+               font=dict(family='Franklin Gothic', color='#000', size=17))
     plot_div01 = plot(fig, output_type='div')
     
     fig = go.Figure()
@@ -581,7 +601,9 @@ def ksajax(request):
     fig.update_layout(title='MSE 오차',
                xaxis_title='Epoch',
                yaxis_title='Mean Square Error [발표수]',
-               width=600, height=600)
+               width=700, height=700,
+               paper_bgcolor='rgba(255,255,255,0.5)',plot_bgcolor='rgba(255,255,255,0.5)',
+               font=dict(family='Franklin Gothic', color='#000', size=17))
     plot_div02 = plot(fig, output_type='div')
     
     # 모델 평가
@@ -599,34 +621,23 @@ def ksajax(request):
     #print("예측 값 :\n", np.round(test_pred.tolist(), 2))
     #print("실제 값 :\n", y)
     
-#     tpx = pd.DataFrame({"예측 값":x, "실제 값":test_pred})
-#      
-#     fig = go.Figure()
-#     fig.add_trace(go.Scatter(y=tpx["예측 값"], name='예측 값',
-#                              line=dict(color='firebrick', width=4)))
-#     fig.add_trace(go.Scatter(y=tpx["실제 값"], name='실제 값',
-#                              line=dict(color='royalblue', width=4)))
-#      
-#     fig.update_layout(title='실제 값과 예측 값',
-#                xaxis_title='Epoch',
-#                yaxis_title='Mean Square Error [발표수]',
-#                width=1500, height=900)
-#      
-#     plotex1 = plot(fig, output_type='div')
-    
     # 데이터 분포와 모델에 의한 선형 회귀선 시각화
-    fig = px.scatter(x=test_labels, y=test_pred, width=900, height=900)
+    fig = px.scatter(x=test_labels, y=test_pred, width=700, height=700)
     fig.update_layout(title="",
                   xaxis_title="True value[발표수]",
-                  yaxis_title="predict value[발표수]")
+                  yaxis_title="predict value[발표수]",
+                  paper_bgcolor='rgba(255,255,255,0.5)',plot_bgcolor='rgba(255,255,255,0.5)',
+                  font=dict(family='Franklin Gothic', color='#000', size=17))
     plot_div1 = plot(fig, output_type='div')
     
     # 오차 분포 확인 (정규성 : 잔차항이 정규분포를 따르는지 확인)
     err = test_pred
-    fig = px.histogram(err, width=900, height=900, title='error[발표수]')
+    fig = px.histogram(err, width=700, height=700, title='error[발표수]')
     fig.update_layout(title="",
                   xaxis_title="predict error[발표수]",
-                  yaxis_title="")
+                  yaxis_title="",
+                  paper_bgcolor='rgba(255,255,255,0.5)',plot_bgcolor='rgba(255,255,255,0.5)',
+                  font=dict(family='Franklin Gothic', color='#000', size=17))
     plot_div2 = plot(fig,output_type='div')
     
     x_train, x_test, y_train, y_test = train_test_split(xt, yt, test_size=0.3, random_state=123)
@@ -641,7 +652,7 @@ def ksajax(request):
     
     model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['acc'])
     early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=5)
-    history = model.fit(x_train, y_train, epochs=500, batch_size=64, verbose=1,callbacks=[early_stop])
+    history = model.fit(x_train, y_train, epochs=500, batch_size=64, verbose=1)
     
     scores = model.evaluate(x_test, y_test)
     
@@ -654,25 +665,26 @@ def ksajax(request):
     #print('예측 결과 :\n', np.where(pred.flatten() > 0.5, 1, 0))    # pred 값이 0.5보다 크면 1, 아니면 0을 보여준다
     #print('실제 결과 :\n', yh)
     
-    fig = px.line(history.history, y='loss', width=900, height=900)
+    fig = px.line(history.history, y='loss', width=700, height=700)
     fig.update_layout(title="",
                   xaxis_title="epoch",
-                  yaxis_title="")
+                  yaxis_title="",
+                  paper_bgcolor='rgba(255,255,255,0.5)',plot_bgcolor='rgba(255,255,255,0.5)',
+                  font=dict(family='Franklin Gothic', color='#000', size=17))
     plot_div3 = plot(fig, output_type='div')
     xh = xh.tolist()
     
+    x = x[:20]
+    y = y[:20]
+    xh = xh[:20]
+    yh = yh[:20]
     
     x = json.dumps(x, cls=NumpyEncoder)
     y = json.dumps(y, cls=NumpyEncoder)
     xh = json.dumps(xh, cls=NumpyEncoder)
     yh = json.dumps(yh, cls=NumpyEncoder)
-    
-#     x = x.list()
-#     y = y.list()
-#     xh = xh.list()
-#     yh = yh.list()
    
-    data={'ks_graph_mae':plot_div01,'ks_graph_mse':plot_div02,'ks_graph_linear':plot_div1,'ks_graph1':plot_div2,'ks_graph2':plot_div3, 'loss':loss, 'mae':mae, 'mse':mse,'acc':acc, 'x':x, 'y':y, 'xh':xh, 'yh':yh}
+    data={'ks_graph_mae':plot_div01,'ks_graph_mse':plot_div02,'ks_graph_linear':plot_div1,'ks_graph_err':plot_div2,'ks_graph_logit':plot_div3, 'loss':loss, 'mae':mae, 'mse':mse,'acc':acc, 'x':x, 'y':y, 'xh':xh, 'yh':yh}
     return HttpResponse(json.dumps(data),content_type='application/json')
 
 

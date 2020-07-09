@@ -1,10 +1,17 @@
 @charset "UTF-8";
+
+
+mark,
+.mark {
+  padding: 0.2em;
+  background-color: #fcf8e3;
+}
  @keyframes plyr-progress {
       to {
         background-position: 25px 0;
       }
     }
-
+	
     .plyr {
       position: relative;
       max-width: 100%;
@@ -482,5 +489,9 @@
     .fp-responsive .fp-auto-height-responsive .fp-slide,
     .fp-responsive .fp-auto-height-responsive .fp-tableCell {
       height: auto !important;
+    }
+    
+    .fnt{
+    font-family: 'Noto Sans KR', sans-serif;
     }
   
