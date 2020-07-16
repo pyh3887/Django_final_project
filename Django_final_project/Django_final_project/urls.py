@@ -18,7 +18,7 @@ from django.urls import path
 from django.urls.conf import include
 from yh import views
 
-urlpatterns = [
+urlpatterns = [ 
     path('admin/', admin.site.urls),
     path('', admin.site.urls),
     path('ks/',include('ks.urls')),

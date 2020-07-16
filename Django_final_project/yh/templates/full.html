@@ -80,6 +80,73 @@ h1 span {
 
   </style>
 
+<script type="text/javascript">
+  // 발표수 토론참여수 새공지사항 값을 임의로 입력 후 버튼 이벤트 발생
+   $(document).ready(function(){
+   $("#btnSubmit").click(function(){
+      $("#cgloading").show()
+      // alert("버튼 넘어옴")
+      var raisehandcount = $("#raisehandcount").val()
+      var checkcount = $("#checkcount").val()
+      var discount = $("#discount").val()
+      
+      $("#predictShow").empty()
+      $.ajax({
+         url:'predictgo',
+         type:'get',
+         data:{'raisehandcount':raisehandcount,'checkcount':checkcount,'discount':discount},
+         dataType:'json',
+         success:function(data){
+            // alert('result' + data['resultPredict'])
+            data['figs']
+            $("#cgloading").hide()
+            $("#predictShow").html(data['fig1']).css("color", "red");
+         },
+         error:function(){
+            alert('실패')
+         }
+      })   
+   })
+   
+    $("#yh_anal1").bind('click',function(){
+       		
+       		 var raisehandcount = $("#raisehandcount1").val()
+       		  var enterclass = $("#enterclass1").val()
+       	      var checkcount = $("#checkcount1").val()
+       	      var discount = $("#discount1").val()
+       		
+       		
+       		 //ajax실행시 로딩바를 보여준다.
+       				$("#showData2").empty()
+       				$("#showData1").empty()
+       				$('#Progress_Loading').show();
+       		
+       		//alert('b')
+       			$.ajax({
+       				
+       				url:'show',
+       				type:'get',
+       				dataType:'json',
+       				async:true,
+       				data:{'raisehandcount':raisehandcount,'checkcount':checkcount,'discount':discount,'enterclass':enterclass},
+       				success:function(data){
+       					//alert(data)
+       					//alert(data['a'])
+       					str1 = "<h1 style='font-family': 'Noto Sans KR', sans-serif'>"+ data['a'] + "</h1>"
+       					str1 += "<h1 style='font-family': 'Noto Sans KR', sans-serif'>정확도 :"+ data['accuracy'] + "%</h1>"
+       					str2 = "<div style='font-family': 'Noto Sans KR', sans-serif'>" + data['yh_grap3']+ "</div>" 					
+       					$('#showData1').append(str1)	
+       					$('#showData2').append(str2)	
+       					$('#Progress_Loading').hide(); //ajax종료시 로딩바를 숨겨준다.		
+       				},
+       				error:function(){
+       					$('#showData').text('error')
+       				}
+       			})
+       		})
+})
+</script>
+
 </head>
  
 
@@ -101,10 +168,10 @@ h1 span {
             
               <div class="container" style="margin-left:626px;margin-top:500px;">
 			    <div class="row"></div>
-			    <div class="row" style="margin-left:514px;">
+			    <div class="row" style="margin-left:446px;">
 			        <div class="col-xs-12">
-			        <a href="#Page2" class="btn btn-dark btn-lg" style="width:300px;"><span>Visualization</span></a>
-			        <a href="#Page3" class="btn btn-dark btn-lg" style="width:300px;"><span>Data Analysis</span></a></div>
+			        <a href="#Page2" class="btn btn-danger btn-lg" style="width:300px;"><span>Visualization</span></a>
+			        <a href="#Page3" class="btn btn-danger btn-lg" style="width:300px;"><span>Data Analysis</span></a></div>
 			    </div>
 			    <div class="row"></div>
 			</div>
@@ -119,6 +186,7 @@ h1 span {
                   <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                   <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                   <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
                   
                 </ol>
                 <div class="carousel-inner" >
@@ -231,10 +299,10 @@ h1 span {
             <div class="col-md-12">
               <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel" data-interval="false">
                 <ol class="carousel-indicators">
-                  <li data-target="#carouselExampleIndicators2" data-slide-to="0"></li>
-                  <li data-target="#carouselExampleIndicators2" data-slide-to="1" class="active"></li>
+                  <li data-target="#carouselExampleIndicators2" data-slide-to="0" class="active"></li>
+                  <li data-target="#carouselExampleIndicators2" data-slide-to="1"></li>
                   <li data-target="#carouselExampleIndicators2" data-slide-to="2" ></li>
-                  <li data-target="#carouselExampleIndicators2" data-slide-to="3"></li>
+                  
                   
                 </ol>
                 <div class="carousel-inner">
@@ -252,7 +320,7 @@ h1 span {
       					   
 							<div class="container">
 							<div id="expand" class="row">
-								<a href="javascript:void(0)" id="comment-reply">Learn more</a>
+								<a href="javascript:void(0)" class="btn btn-danger btn-lg" id="comment-reply">Learn more</a>
 							</div>
 							
 							<div id="nested" class="row m-2 "  style="display:none;width: 600px">
@@ -280,7 +348,7 @@ h1 span {
 
        					 <div class="col-xs-12" style="width: 100%">
        					   <div style="float: right">
-      					  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" > 
+      					  <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#exampleModalCenter" > 
 						  3D 시각화
 						  </button>
 						  </div><br>
@@ -302,37 +370,37 @@ h1 span {
 						<div class="container">
 					    <div class="row">
 					        <div class="col-xs-12" style="padding-bottom: 50px">
-					        <h1 class="article-title" style="font-family: 'Noto Sans KR', sans-serif;font-size: 80px;">성적을 분석해 드릴게요</h1>
+					        <h1 class="article-title" style="font-family: 'Noto Sans KR', sans-serif;font-size: 80px;">성적을 분석해 드릴게요!</h1>
 					        </div>
 					        <div class="col-md-6">
-					        <form  style="font-family: 'Noto Sans KR', sans-serif">
+					       <form class="yh_form" style="font-family: 'Noto Sans KR', sans-serif">
 						  <h1>성적을 입력하세요</h1>
 						  <div class="question">
-						    <input id="raisehandcount" type="text" required numberOnly/>
+						    <input id="raisehandcount1" type="text" required numberOnly/>
 						    <label>발표 수</label>
 						  </div>
 						  <div class="question">
-						    <input id='enterclass' type="text" required numberOnly/>
+						    <input id='enterclass1' type="text" required numberOnly/>
 						    <label>과정 반복 수</label>
 						  </div>
 						  <div class="question">
-						    <input id="checkcount" type="text" required numberOnly/>
+						    <input id="checkcount1" type="text" required numberOnly/>
 						    <label>새 공지사항 확인 수</label>
 						  </div>
 						  <div class="question">
-						    <input id="discount" type="text" required numberOnly/>
+						    <input id="discount1" type="text" required numberOnly/>
 						    <label>토론 참여 수</label>
 						  </div>
 						  <button id="yh_anal1">Start</button>
 						</form>
                         
 					        </div>
-					        <div class="col-md-6" style="font-family: 'Noto Sans KR', sans-serif">					        
-					        <div id="showData2"></div>
-							<div id="showData1"></div>
-							<div id = "Progress_Loading" style="font-family: 'Noto Sans KR', sans-serif;margin-top: 100px"><!-- 로딩바 -->
-							<b style="font-family: 'Noto Sans KR', sans-serif;font-size: 25px ">데이터 분석중입니다 잠시만 기다려주세요 </b>
-							<img src="../static/loading.gif"/>
+					        <div class="col-md-6" style="font-family: 'Noto Sans KR', sans-serif;color:black;width: 600px">					        
+					        <div id="showData2" style="font-family: 'Noto Sans KR', sans-serif;color:black;"></div>
+							<div id="showData1" style="font-family: 'Noto Sans KR', sans-serif;color:black;"></div>
+							<div id = "Progress_Loading" style="font-family: 'Noto Sans KR', sans-serif;margin-top: 200px"><!-- 로딩바 -->
+							<b style="font-family: 'Noto Sans KR', sans-serif;font-size: 30px;color: black;">데이터 분석중입니다 잠시만 기다려주세요 </b>
+							<img width="250px" height="50px" src="../static/loading.gif"/>
 							</div>
 					        </div>
 					        
@@ -367,10 +435,11 @@ h1 span {
             <div class="col-md-12">
               <div id="carouselExampleIndicators3" class="carousel slide" data-ride="carousel" data-interval="false">
                 <ol class="carousel-indicators">
-                  <li data-target="#carouselExampleIndicators3" data-slide-to="0"></li>
+                  <li data-target="#carouselExampleIndicators3" data-slide-to="0" class="active"></li>
                   <li data-target="#carouselExampleIndicators3" data-slide-to="1"></li>
-                  <li data-target="#carouselExampleIndicators3" data-slide-to="2" class="active"></li>
+                  <li data-target="#carouselExampleIndicators3" data-slide-to="2"></li>
                   <li data-target="#carouselExampleIndicators3" data-slide-to="3"></li>
+                  <li data-target="#carouselExampleIndicators2" data-slide-to="4"></li>
                   
                 </ol>
                 <div class="carousel-inner">
@@ -381,11 +450,12 @@ h1 span {
                       <div class="wait" style="margin-bottom: 300px">
                          <img src="../static/images/loading.gif">
                       </div>
-                      <div class="kstitle" style="margin: auto; color: white; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;"></div>
                         <div class="row">
-                            <div id="maegraph" class="col-sm-7"></div>
-                           <div class="col-sm-5" style="margin: auto; color: black; background-color: rgba(255,255,255,0.5);">
-                              <div id="maetext"></div>
+                            <div id="maegraph" class="col-sm-7" style="font-family: 'Noto Sans KR', sans-serif;"
+                           ></div>
+                           <div class="col-sm-5" style="margin: auto;">
+                              <div class="kstitle" style="color: white; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;font-family: 'Noto Sans KR', sans-serif;"></div>
+                              <div id="maetext" style="margin: auto; color: black; background-color: rgba(255,255,255,0.5);font-family: 'Noto Sans KR', sans-serif;"></div>
                            </div>
                         </div>
                       </div>
@@ -399,11 +469,11 @@ h1 span {
                       <div class="wait" style="margin-bottom: 300px">
                          <img src="../static/images/loading.gif">
                       </div>
-                      <div class="kstitle" style="margin: auto; color: white; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;"></div>
                         <div class="row">
-                            <div id="msegraph" class="col-sm-7"></div>
-                           <div class="col-sm-5" style="margin: auto; color: black; background-color: rgba(255,255,255,0.5);">
-                              <div id="msetext"></div>
+                            <div id="msegraph" class="col-sm-7" style="font-family: 'Noto Sans KR', sans-serif;"></div>
+                           <div class="col-sm-5" style="margin: auto;">
+                            <div class="kstitle" style="margin: auto; color: white; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;"></div>
+                              <div id="msetext" style="margin: auto; color: black; background-color: rgba(255,255,255,0.5);font-family: 'Noto Sans KR', sans-serif;"></div>
                            </div>
                         </div>
                       </div>
@@ -417,11 +487,11 @@ h1 span {
                       <div class="wait" style="margin-bottom: 300px">
                          <img src="../static/images/loading.gif">
                       </div>
-                      <div class="kstitle" style="margin: auto; color: white; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;"></div>
                          <div class="row">
-                            <div id="lineargraph" class="col-sm-7"></div>
-                            <div class="col-sm-5" style="margin: auto; color: black; background-color: rgba(255,255,255,0.5);">
-                               <div id="lineartext"></div>
+                            <div id="lineargraph" class="col-sm-7" style="font-family: 'Noto Sans KR', sans-serif;"></div>
+                            <div class="col-sm-5" style="margin: auto;">
+                             <div class="kstitle" style="margin: auto; color: white; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;"></div>
+                               <div id="lineartext" style="margin: auto; color: black; background-color: rgba(255,255,255,0.5);font-family: 'Noto Sans KR', sans-serif;"></div>
                             </div>
                          </div>
                       </div>
@@ -435,11 +505,11 @@ h1 span {
                       <div class="wait" style="margin-bottom: 300px">
                          <img src="../static/images/loading.gif">
                       </div>
-                      <div class="kstitle" style="margin: auto; color: white; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;"></div>
                          <div class="row">
-                            <div id="errgraph" class="col-sm-7"></div>
-                            <div class="col-sm-5" style="margin: auto; color: black; background-color: rgba(255,255,255,0.5);">
-                               <div id="errtext"></div>
+                            <div id="errgraph" class="col-sm-7" style="font-family: 'Noto Sans KR', sans-serif;"></div>
+                            <div class="col-sm-5" style="margin: auto;">
+                             <div class="kstitle" style="margin: auto; color: white; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;font-family: 'Noto Sans KR', sans-serif;"></div>
+                               <div id="errtext" style="margin: auto; color: black; background-color: rgba(255,255,255,0.5);font-family: 'Noto Sans KR', sans-serif;"></div>
                             </div>
                          </div>
                       </div>
@@ -454,11 +524,12 @@ h1 span {
                       <div class="wait" style="margin-bottom: 300px">
                          <img src="../static/images/loading.gif">
                       </div>
-                      <div class="kstitle2" style="margin: auto; color: white; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;"></div>
                          <div class="row">
-                            <div id="logitgraph" class="col-sm-7"></div>
-                            <div class="col-sm-5" style="margin: auto; color: black; background-color: rgba(255,255,255,0.5);">
-                               <div id="logittext"></div>
+                            <div id="logitgraph" class="col-sm-7 " style="font-family: 'Noto Sans KR', sans-serif;"></div>
+                            <div class="col-sm-5" style="margin: auto;">
+                             <div class="kstitle2" style="margin: auto; color: white; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;"></div>
+                             <div class="logitgo"></div>
+                               <div id="logittext" style="margin: auto; color: black; background-color: rgba(255,255,255,0.5);font-family: 'Noto Sans KR', sans-serif;"></div>
                             </div>
                          </div>
                       </div>
@@ -480,39 +551,40 @@ h1 span {
           <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ks END~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
           <div id='section5' class='section' data-anchor='page5' style="background-image: url('../static/images/cgbook1.png')">
             <div class="col-md-12">
-              <div id="carouselExampleIndicators4" class="carousel slide" data-ride="carousel">
+              <div id="carouselExampleIndicators4" class="carousel slide" data-ride="carousel" data-interval="false">
                 <ol class="carousel-indicators">
                   <li data-target="#carouselExampleIndicators4" data-slide-to="0" class="active"></li>
                   <li data-target="#carouselExampleIndicators4" data-slide-to="1"></li>
                   <li data-target="#carouselExampleIndicators4" data-slide-to="2"></li>
-                  <li data-target="#carouselExampleIndicators4" data-slide-to="3"></li>
-                  <li data-target="#carouselExampleIndicators4" data-slide-to="4"></li>
+                  
+                  
                   
                 </ol>
                        <div class="carousel-inner">
                 
                   <div class="carousel-item active">
                     <div class="container-fluid w-100">
-                      <img class="d-block" src="http://1x1px.me/FFFFFF-0.png" alt="&nbsp;" style="width: 95vw; height: 85vh; style="rgba(0, 0, 0, 0.6);" />
+                      <div class="d-block" style="width: 95vw; height: 85vh;">
                       <div class="carousel-caption"style="margin-left:0%">
                        <div class="row">
                        <div class="col-sm-7">
                        {{cg_graph7|safe}}<br></div>
                        <div class="col-sm-5" style = "background-color: rgba(255,255,255,0.7); top: 50px; margin:auto; position: inherit;"><br>
-                  <h4 style="font-size:20px; font-weight: bold; color: midnightblue;"><br>새 공지사항 확인 횟수로 결석인원 분석</h4><br><br>                       
+                  <h4 style="font-size:30px; font-weight: bold; color: black;font-family: 'Noto Sans KR', sans-serif;">x = 국가 , y = 새 공지사항 확인 수 <br><br>새 공지사항 확인 횟수로 결석인원 분석</h4><br><br>                       
                        </div><br>
                        <div class="col-sm-7">
                        {{cg_graph71|safe}}<br></div>
                        <div class="col-sm-5" style = "background-color: rgba(255,255,255,0.7); top: 50px; margin:auto; position: inherit;"><br>
-                  <h4 style="font-size:20px; font-weight: bold; color: midnightblue;"><br>토론 참여 횟수로 결석인원 분석</h4><br><br>                       
+                  <h4 style="font-size:30px; font-weight: bold; color: black;font-family: 'Noto Sans KR', sans-serif;">x = 국가 , y = 토론 참여수 <br><br>토론 참여 횟수로 결석인원 분석</h4><br><br>                       
                        </div><br>
-                        <div class="col-sm-7">
+                        <div class="col-sm-7" style="font-family: 'Noto Sans KR', sans-serif;">
                        {{cg_graph72|safe}}<br></div>
                        <div class="col-sm-5" style = "background-color: rgba(255,255,255,0.7); top: 50px; margin:auto; position: inherit;">
-                  <h4 style="font-size:20px; font-weight: bold; color: midnightblue;"><br><br>발표 횟수로 결석인원 분석 </h4><br><br>                       
+                  <h4 style="font-size:30px; font-weight: bold; color: black;font-family: 'Noto Sans KR', sans-serif;"><br>x = 국가 , y = 발표수 <br><br>발표 횟수로 결석인원 분석 </h4><br><br>                       
                        </div>
                        </div>
 
+                      </div>
                       </div>
                     </div>
                   </div>
@@ -523,15 +595,15 @@ h1 span {
                        <!--  {{cg_graph73|safe}}  -->
                        <!-- {{cg_graph2|safe}} -->
                        <div class="row">
-                       <div class="col-sm-7">
+                       <div class="col-sm-7" style="font-family: 'Noto Sans KR', sans-serif;">
                        {{cg_graph74|safe}}
                        </div><div class="col-sm-5" style = "background-color: rgba(255,255,255,0.7);"><br><br><br><br><br>
                   <h2 style="color: black;">3D 모델로 시각화</h2><br><br>
-                  <h4 style="font-size:20px; font-weight: bold; color: midnightblue;">앞서 사용한 데이터들을 전부 사용하여 3D 모델로 출력 </h4><br><br>
-                  <h4 style="font-size:20px; font-weight: bold; color: midnightblue;">해석1. 결석 횟수가 많은 학생들은 상대적으로 학교생활에 적극적이지 않다.</h4><br>
-                  <h4 style="font-size:20px; font-weight: bold; color: midnightblue;">해석2. 여학생들은 상대적으로 7일 이상 결석하지 않음</h4><br>
-                  <h4 style="font-size:20px; font-weight: bold; color: midnightblue;">해석3. 반면, 남학생들은 상대적으로 7일 이상 결석하는 인원이 더 많음.</h4><br>
-                  <h4 style="font-size:20px; font-weight: bold; color: midnightblue;">수업에 참여도가 높을수록 상대적으로 결석일수가 7일 이하인 것을 확인 할 수 있다. </h4><br>
+                  <h4 style="font-size:20px; font-weight: bold; color: midnightblue;font-family: 'Noto Sans KR', sans-serif;">앞서 사용한 데이터들을 전부 사용하여 3D 모델로 출력 </h4><br><br>
+                  <h4 style="font-size:20px; font-weight: bold; color: midnightblue;font-family: 'Noto Sans KR', sans-serif;">해석1. 결석 횟수가 많은 학생들은 상대적으로 학교생활에 적극적이지 않다.</h4><br>
+                  <h4 style="font-size:20px; font-weight: bold; color: midnightblue;font-family: 'Noto Sans KR', sans-serif;">해석2. 여학생들은 상대적으로 7일 이상 결석하지 않음</h4><br>
+                  <h4 style="font-size:20px; font-weight: bold; color: midnightblue;font-family: 'Noto Sans KR', sans-serif;">해석3. 반면, 남학생들은 상대적으로 7일 이상 결석하는 인원이 더 많음.</h4><br>
+                  <h4 style="font-size:20px; font-weight: bold; color: midnightblue;font-family: 'Noto Sans KR', sans-serif;">수업에 참여도가 높을수록 상대적으로 결석일수가 7일 이하인 것을 확인 할 수 있다. </h4><br>
                   
                   
                        </div>
@@ -545,27 +617,27 @@ h1 span {
                                                  
                       <div class="d-block"  style="width: 95vw; height: 75vh;">
                       <div class="carousel-caption" style="height:70vh">
-                      <h1>SKlearn의 주요 모델에 학습시켜 임의의 값으로 결과 출력</h1><br>
-                      {{cg_chart|safe}}
+                      <h1 style="font-family: 'Noto Sans KR', sans-serif;">SKlearn의 주요 모델에 학습시켜 임의의 값으로 결과 출력</h1><br>
+                      <div style="font-family: 'Noto Sans KR', sans-serif;">{{cg_chart|safe}}</div>
                       <br><br>
-					                      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-					  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-					    <span class="navbar-toggler-icon"></span>
-					  </button>
-					
-					  <div class="collapse navbar-collapse" id="navbarColor03" style="margin-left:25%">
-					    <form class="form-inline my-2 my-lg-0">
-					    <input class="form-control mr-sm-2" type="text" placeholder="새 공지사항 확인 수" id="checkcount">
-					    <input class="form-control mr-sm-2" type="text" placeholder="발표 수" id="raisehandcount">
-					      <input class="form-control mr-sm-2" type="text" placeholder="토론 참여 수" id="discount">
-					      <button class="btn btn-secondary my-2 my-sm-0" type="submit" id="btnSubmit">예측하기</button>
-					    </form>
-					    <br><br>
-					  </div>
-					</nav><br><br>
-					                   <h1>결 과 출 력</h1><br>
-					    <div id="predictShow"></div>
-					                      </div>
+                      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor03" style="margin-left:25%">
+    <form class="form-inline my-2 my-lg-0">
+    <input class="form-control mr-sm-2" type="text" placeholder="새 공지사항 확인 수" id="checkcount">
+    <input class="form-control mr-sm-2" type="text" placeholder="발표 수" id="raisehandcount">
+      <input class="form-control mr-sm-2" type="text" placeholder="토론 참여 수" id="discount">
+      <button class="btn btn-secondary my-2 my-sm-0" type="submit" id="btnSubmit">예측하기</button>
+    </form>
+    <br><br>
+  </div>
+</nav><br><br>
+                   <h1 style="font-family: 'Noto Sans KR', sans-serif;">결 과 출 력</h1><br>
+    <div id="predictShow"></div>
+                      </div>
                       </div>
                     </div>
                   </div>
@@ -657,11 +729,13 @@ h1 span {
           $(this).closest("div").siblings("#nested").fadeIn();
           
            $("a#comment-reply").hide()
+           
+           
           // add class to the one we clicked
           
          // $("a#comment-reply").fadeOut();
            
-         
+          
 
        });
     });
@@ -670,7 +744,7 @@ h1 span {
     </script>
     
     
-    <script type="text/javascript" src="../static/js/ajax.js"></script>
+   <script type="text/javascript" src="{% static '/js/ajax.js' %}"></script>
    
 </body>
 </html>

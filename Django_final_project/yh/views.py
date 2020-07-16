@@ -367,7 +367,7 @@ def mainFunc(request):
                                             ['XGboost',np.where(model3flatten.flatten() > 0.5 , 1, 0), y[:10].ravel(), resultXGboost]]
     
     colorscale = [[0, '#272D31'],[.5, '#ffffff'],[1, '#ffffff']]
-    font=['#FCFCFC', 'red', 'black', 'black', 'red']
+    font=['#FCFCFC', 'red', 'black',  'black', 'red']
     
     fig51 = ff.create_table(text, colorscale=colorscale, font_colors=font)
     fig51.layout.width=1300
